@@ -16,6 +16,8 @@ function generateUUID() {
     return uuid;
 };
 
+app.set('port', (process.env.PORT || 5000));
+
 app.use(express.static('public_html'));
 
 app.get('/', function (req, res) {
@@ -29,6 +31,6 @@ io.on('connection', function (socket) {
 	var player = new Player(clientId, socket);
 });
 
-http.listen(3000, function () {
-	console.log('WebApp server listening on *:3000');
+http.listen(app.get('port'), function () {
+	console.log('WebApp server listening on *:'+app.get('port'));
 });
