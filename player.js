@@ -47,6 +47,7 @@ class Player {
 				}
 				else {
 					// TODO 
+					
 					var result = this.d_map.look(parsed.target);
 					if (result.success) {
 						this.sendMessage("<p>" + result.item.description + "</p>");

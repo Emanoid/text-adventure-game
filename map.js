@@ -4,6 +4,8 @@ class Map {
 	constructor(mapData) {
 		this.d_map = mapData.map;
 		this.d_currentRoom = this.d_map[mapData.startingRoom];
+
+		// Any other game state here
 	}
 
 	// Responds to 'move <direction>' or '<direction>'
@@ -14,8 +16,14 @@ class Map {
 
 		if (this.d_currentRoom.exits[direction]) {
 			// Update the current room
-			this.d_currentRoom = this.d_map[this.d_currentRoom.exits[direction].roomId];
-			return true;
+			var nextRoom = this.d_map[this.d_currentRoom.exits[direction].roomId];
+			if (nextRoom) {
+				this.d_currentRoom = nextRoom;
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 		else {
 			// Not a valid exit
@@ -52,6 +60,7 @@ class Map {
 	}
 
 	look(itemDesc) {
+		// TODO look in inventory as well
 		var itemResult = this.hasItem(this.d_currentRoom.items, itemDesc);
 		if (itemResult) {
 			return {
@@ -106,11 +115,20 @@ class Map {
 				var dir = LEGAL_DIRECTIONS[i];
 				var dirText = 'To the ' + dir + ' is ';
 				if (dir === 'up' || dir === 'down') {
-					dirText = 'A set of stairs lead ' + dir + ' to ';
+					var elevationType = 'stairs'
+					if (this.d_currentRoom.exits[dir] && 
+						this.d_currentRoom.exits[dir].elevationType !== undefined) {
+						elevationType = this.d_currentRoom.exits[dir].elevationType;
+					}
+					dirText = 'A set of ' + elevationType + ' lead ' + dir + ' to ';
 				}
 
 				if (this.d_currentRoom.exits[dir]) {
-					roomString += dirText + this.d_currentRoom.exits[dir].description;
+					var nextDesc = 'the next area';
+					if (this.d_currentRoom.exits[dir].description) {
+						nextDesc = this.d_currentRoom.exits[dir].description;
+					}
+					roomString += dirText + nextDesc + '. ';
 				}
 			}
 			roomString += '</p>';
