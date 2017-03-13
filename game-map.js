@@ -221,7 +221,7 @@ var GAMEMAP = {
 					keywords: ['toy chest'],
 					interactions: {
 						'open': {
-							requires: 'red-key',
+							requires: ['red-key'],
 							yields: {
 								displayText: 'The chest opens to reveal a pair of RUBY SLIPPERS',
 								item: { // an item that's added to the room items
@@ -363,7 +363,422 @@ var GAMEMAP = {
 		},
 
 		//Row 5
+		'H-7': {
+			roomId: 'H-7',
+			description: "You are in a brightly lit room.",
+			interactables: {
+				'jukebox': {
+					// set hidden to true to make this item NOT show up in description 
+					name: 'A jukebox in the corner.',
+					description: "A weird looking jukebox. It apparently wants shiny coins. A peeling label on it reads 'Sunset Direction'.",
+					keywords: ['jukebox'],
+					interactions: {
+						'use': {
+							requires: ['silver-coin'],
+							yields: {
+								displayText: 'The jukebox starts playing the theme from Ghostbusters, and a DIAMOND NECKLACE falls from a hidden slot.',
+								item: { // an item that's added to the room items
+									id: 'diamond-necklace',
+									name: 'A DIAMOND NECKLACE',
+									description: 'A very shiny DIAMOND NECKLACE. It looks pretty.',
+									keywords: ['necklace', 'diamond-necklace']
+								}
+							}
+						}
+					}
+				}
+			},
+			exits: {
+				'up': {
+					description: 'a small room',
+					roomId: 'H-6'
+				},
+				'north': {
+					roomId: '0-3-4',
+					description: 'a hallway'
+				}
+			}
+		},
+		'phone-room': {
+			roomId: 'phone-room',
+			description: "You are in a semi-lit room. There is a table with a... cellphone? It seems stuck to the table though...",
+			interactables: {
+				'phone': {
+					hidden: true,
+					name: 'A cellphone stuck the the table',
+					description: 'A rather old school candybar phone. Keys seem to work though.',
+					keywords: ['phone', 'cellphone'],
+					interactions: {
+						'text': {
+							requires: [], //TODO list all items
+							requiredInput: 'hauntings', // The input required for this command
+							isActive: 'when-requirements-met', // This is only a valid action when the requirements are met, if undefined, assumed to be active
+							yields: {
+								displayText: 'TODO Something something act 2 here',
+							}
+						}
+					}
+				}
+			},
+			exits: {
+				'north': {
+					roomId: '0-5-4',
+					description: 'a hallway'
+				}
+			}
+		},
+		'courtyard': {
+			roomId: 'courtyard',
+			description: "You are in a courtyard. There's a fountain here that has no water. It smells like fish.",
+			exits: {
+				'north': {
+					roomId: '0-7-4',
+					description: 'a room'
+				},
+				'east': {
+					roomId: '0-8-5',
+					description: 'a hallway'
+				},
+				'south': {
+					roomId: '0-7-6',
+					description: 'a hallway'
+				}
+			}
+		},
+		'0-8-5': {
+			roomId: '0-8-5',
+			description: "You are in a narrow hallway. There's a statue of a cat. The cat looks grumpy.",
+			exits: {
+				'east': {
+					roomId: 'G-8',
+					description: 'a closet'
+				},
+				'west': {
+					roomId: 'courtyard',
+					description: 'the courtyard'
+				}
+			}
+		},
+		'G-8': {
+			roomId: 'G-8',
+			description: "You are in a supply closet. There is a dirty mop here that you do not feel inclined to touch. There's a weird puddle on the ground.",
+			exits: {
+				'west': {
+					roomId: '0-8-5',
+					description: 'a hallway'
+				},
+				'east': {
+					roomId: 'G-9',
+					description: 'a ladder'
+				},
+				'south': {
+					roomId: 'G-7',
+					description: 'a hallway'
+				}
+			}
+		},
+		'G-9': {
+			roomId: 'G-9',
+			description: "You are at the bottom of a ladder that is missing a couple of rungs.",
+			exits: {
+				'up': {
+					roomId: 'G-10',
+					description: 'the top of the ladder'
+				},
+				'west': {
+					roomId: 'G-8',
+					description: 'a closet'
+				}
+			}
+		},
 
+		// ROW 6
+		'M-1': {
+			roomId: 'M-1',
+			description: "You are in a brightly lit room. It's lit by a lantern. Who leaves a lantern lit and vacates their house? That's just irresponsible.",
+			items: {
+				'purple-key': {
+					id: 'purple-key',
+					keywords: ['purple key'],
+					name: 'A PURPLE KEY',
+					description: "A plain purple key, with a label that reads 'Look Down'"
+				}
+			},
+			exits: {
+				'north': {
+					roomId: 'M-2',
+					description: 'the north end of the room'
+				},
+				'east': {
+					roomId: '0-1-4',
+					description: 'a hallway'
+				}
+			}
+		},
+		'0-1-4': {
+			roomId: '0-1-4',
+			description: "You are in a short hallway. Nothing to see here. Except for that... oh wait, that's nothing.",
+			exits: {
+				'west': {
+					roomId: 'M-1',
+					description: 'a room'
+				},
+				'east': {
+					roomId: '0-2-4',
+					description: 'a laundry room of sorts'
+				}
+			}
+		},
+		'0-2-4': {
+			roomId: '0-2-4',
+			description: "You are in what looks like a laundry room. There's a rather beat up washboard.",
+			items: {
+				'worn-shirt': {
+					id: 'worn-shirt',
+					keywords: ['shirt'],
+					name: 'A rather worn SHIRT',
+					description: 'A worn out shirt, full of plot holes. Uh, holes'
+				}
+			},
+			exits: {
+				'west': {
+					roomId: '0-1-4',
+					description: 'a hallway'
+				},
+				'north': {
+					roomId: '0-2-3',
+					description: 'a hallway',
+				},
+				'east': {
+					roomId: '0-3-4',
+					description: 'a hallway'
+				}
+			}
+		},
+		'0-3-4': {
+			roomId: '0-3-4',
+			description: "You are in a dimly lit hallway. If you squint hard enough, you might be able to see... nothing at all.",
+			exits: {
+				'west': {
+					roomId: '0-2-4',
+					description: 'a laundry room'
+				},
+				'south': {
+					roomId: 'H-7',
+					description: 'a room'
+				},
+				'east': {
+					roomId: '0-4-4',
+					description: 'more of the same hallway'
+				}
+			}
+		},
+		'0-4-4': {
+			roomId: '0-4-4',
+			description: "You are still in a dimly lit hallway. This seems to go on forever.",
+			exits: {
+				'west': {
+					roomId: '0-3-4',
+					description: 'one end of the hallway'
+				},
+				'east': {
+					roomId: '0-5-4',
+					description: 'more of the same hallway'
+				}
+			}
+		},
+		'0-5-4': {
+			roomId: '0-5-4',
+			description: "You are in part of a hallway. It is dimly lit. It smells like... old people?",
+			exits: {
+				'west': {
+					roomId: '0-4-4',
+					description: 'more of the same hallway'
+				},
+				'south': {
+					roomId: 'phone-room',
+					description: 'a room'
+				},
+				'north': {
+					roomId: '0-5-3',
+					description: 'a different hallway'
+				},
+				'east': {
+					roomId: '0-6-4',
+					description: 'one end of the hallway'
+				}
+			}
+		},
+		'0-6-4': {
+			roomId: '0-6-4',
+			description: "You are in a hallway. There are several portraits on the wall. The people in the portraits all look self-important.",
+			exits: {
+				'west': {
+					roomId: '0-5-4',
+					description: 'more of the same hallway'
+				},
+				'east': {
+					roomId: '0-7-4',
+					description: 'a room'
+				}
+			}
+		},
+		'0-7-4': {
+			roomId: '0-7-4',
+			description: "You are in a bright, sunny room looking out into a courtyard. This actually seems... nice.",
+			exits: {
+				'west': {
+					roomId: '0-6-4',
+					description: 'a hallway'
+				},
+				'north': {
+					roomId: '0-7-3',
+					description: 'a hallway'
+				},
+				'south': {
+					roomId: 'courtyard',
+					description: 'a courtyard'
+				}
+			}
+		},
+
+		// ROW 7
+		'M-2': {
+			roomId: 'M-2',
+			description: "You are in the north end of a brightly lit room. There is a rather large statue of a lion. You can almost hear it roar.",
+			exits: {
+				'south': {
+					roomId: 'M-1',
+					description: 'the south end of the room'
+				},
+				'north': {
+					roomId: 'M-3',
+					description: 'a room'
+				}
+			}
+		},
+		'M-5': {
+			roomId: 'M-5',
+			description: "You are in a bedroom. This bedroom has no windows. Perfect for not waking up. Ever. Strangely enough, there's a small set of stairs here.",
+			exits: {
+				'north': {
+					roomId: 'M-4',
+					description: "a bathroom"
+				},
+				'up': {
+					roomId: 'M-6',
+					description: 'another room'
+				}
+			}
+		},
+		'0-2-3': {
+			roomId: '0-2-3',
+			description: "You are in a long hallway. It's a generic looking hallway. Like someone went to hallways-r-us and got one.",
+			exits: {
+				'north': {
+					roomId: '0-2-2',
+					description: 'more of the same hallway'
+				},
+				'south': {
+					roomId: '0-2-4',
+					description: 'a laundry room'
+				}
+			}
+		},
+		'0-5-3': {
+			roomId: '0-5-3',
+			description: "You are in a small hallway. It smells like smoke. Why are there so many weird smells here?",
+			exits: {
+				'north': {
+					roomId: 'SS-6',
+					description: 'a bedroom'
+				},
+				'south': {
+					roomId: '0-5-4',
+					description: 'a different hallway'
+				}
+			}
+		},
+		'0-7-3': {
+			roomId: '0-7-3',
+			description: "You are in a hallway. There are numerous sculptures here that don't really make sense. One of them is a large fish eating itself. It gives you the spooks.",
+			exits: {
+				'north': {
+					roomId: '0-7-2',
+					description: 'more of the same hallway'
+				},
+				'south': {
+					roomId: '0-7-4',
+					description: 'a room'
+				},
+				'east': {
+					roomId: '0-8-3',
+					description: 'a pantry'
+				}
+			}
+		},
+		'0-8-3': {
+			roomId: '0-8-3',
+			description: "You are in a pantry area of sorts. There is a mound of salt-like crystals on the floor. What a waste.",
+			exits: {
+				'west': {
+					roomId: '0-7-3',
+					description: 'a hallway'
+				},
+				'east': {
+					roomId: '0-9-3',
+					description: 'a room'
+				}
+			}
+		},
+		'0-9-3': {
+			roomId: '0-9-3',
+			description: "You are in a rather well designed room with vaulted ceilings and bright lights. Oh wait, you're hallucinating. You're in a tiny, sad room. It smells like fish.",
+			exits: {
+				'west': {
+					roomId: '0-8-3',
+					description: 'a pantry'
+				},
+				'north': {
+					roomId: '0-9-2',
+					description: 'a room'
+				},
+				'east': {
+					roomId: '0-10-3',
+					description: 'a hallway'
+				}
+			}
+		},
+		'0-10-3': {
+			roomId: '0-10-3',
+			description: "You are in a narrow hallway with a small window. The view is less than exciting.",
+			exits: {
+				'west': {
+					roomId: '0-9-3',
+					description: 'a room'
+				},
+				'east': {
+					roomId: '0-11-3',
+					description: 'a room'
+				}
+			}
+		},
+		'0-11-3': {
+			roomId: '0-11-3',
+			description: "You are in a large room. It looks like it was previously used as a ballroom. There's a lovely chandelier hanging from the ceiling.",
+			exits: {
+				'west': {
+					roomId: '0-10-3',
+					description: "a hallway"
+				},
+				'north': {
+					roomId: 'T-9',
+					description: 'a flight of stairs'
+				}
+			}
+		},
+
+		// ROW 8
 	}
 }
 // var GAMEMAP = {
