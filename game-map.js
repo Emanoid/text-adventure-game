@@ -779,6 +779,533 @@ var GAMEMAP = {
 		},
 
 		// ROW 8
+		'M-3': {
+			roomId: 'M-3',
+			description: "You are in a room with a very large bookshelf. There are a great many books, each more boring than the last. A brightly colored book at the Top of the shelf looks the most boring of all.",
+			exits: {
+				'east': {
+					roomId: 'M-4',
+					description: 'a bathroom'
+				},
+				'south': {
+					roomId: 'M-2',
+					description: 'another room'
+				}
+			}
+		},
+		'M-4': {
+			roomId: 'M-4',
+			description: "You are in a bathroom. It's small, like New York City closet small. But somehow still manages to fit in two doors and a sink.",
+			exits: {
+				'west': {
+					roomId: 'M-3',
+					description: 'a room'
+				},
+				'south': {
+					roomId: 'M-5',
+					description: 'a bedroom'
+				}
+			}
+		},
+		'0-2-2': {
+			roomId: '0-2-2',
+			description: "You are in a long hallway. There are paintings on the walls. There's a rhino, and a cat, and a... gear?",
+			exits: {
+				'north': {
+					roomId: '0-2-1',
+					description: 'more of the same hallway'
+				},
+				'south': {
+					roomId: '0-2-3',
+					description: 'another part of the hallway'
+				}
+			}
+		},
+		'0-4-2': {
+			roomId: '0-4-2',
+			description: "You are in a nondescript hallway. It's probably best if you move along.",
+			exits: {
+				'north': {
+					roomId: '0-4-1',
+					description: 'a room'
+				},
+				'east': {
+					roomId: 'SS-6',
+					description: 'a bedroom'
+				}
+			}
+		},
+		'SS-6': {
+			roomId: 'SS-6',
+			description: "You are in a medium sized bedroom. There is a painting of the Northern Lights.",
+			interactables: {
+				'blue-chest': {
+					name: 'A CHEST with a blue lock on it',
+					description: 'A rather beat-up looking chest with a large blue lock in the front',
+					keywords: ['chest'],
+					interactions: {
+						'open': {
+							requires: ['blue-key'],
+							yields: {
+								displayText: 'You open the chest and find an AQUAMARINE RING in it',
+								item: {
+									id: 'aquamarine-ring',
+									name: 'An AQUAMARINE RING',
+									description: 'A rather pretty AQUAMARINE RING. Looks to be about a size 5.5',
+									keywords: ['ring', 'aquamarine ring']
+								}
+							}
+						}
+					}
+				}
+			},
+			exits: {
+				'west': {
+					roomId: '0-4-2', 
+					description: 'a hallway'
+				},
+				'east': {
+					roomId: 'SS-5',
+					description: 'a dark room'
+				},
+				'south': {
+					roomId: '0-5-3',
+					description: 'a hallway'
+				}
+			}
+		},
+		'SS-5': {
+			roomId: 'SS-5',
+			description: "You are in a cold and dark room. It is cold, and it is dark. That seems pretty descriptive.",
+			exits: {
+				'west': {
+					roomId: 'SS-6',
+					description: 'a bedroom'
+				},
+				'up': {
+					roomId: 'SS-4',
+					description: 'an alcove'
+				}
+			}
+		},
+		'0-7-2': {
+			roomId: '0-7-2',
+			description: "You are in a hallway. There seems to be some sort of magical lighting system going on here. You can't tell exactly how this hallway is being lit up.",
+			exits: {
+				'north': {
+					roomId: '0-7-1',
+					description: 'one end of the hallway'
+				},
+				'east': {
+					roomId: 'NN-1',
+					description: 'a pantry',
+				},
+				'south': {
+					roomId: '0-7-3',
+					description: 'more of the same hallway'
+				}
+			}
+		},
+		'NN-1': {
+			roomId: 'NN-1',
+			description: "You are in a pantry-like room. There are empty jars everywhere. There's also a rickety old ladder.",
+			items: {
+				'honey-jar': {
+					id: 'honey-jar',
+					keywords: ['jar', 'honey jar', 'hunny jar'],
+					name: 'a JAR of Northern Pride Hunny',
+					description: 'A rather large JAR of golden yellow hunny'
+				}
+			},
+			exits: {
+				'west': {
+					roomId: '0-7-2',
+					description: 'a hallway'
+				},
+				'up': {
+					roomIs: 'NN-2',
+					description: 'a landing'
+				}
+			}
+		},
+		'0-9-2': {
+			roomId: '0-9-2',
+			description: "You are in a room with a giant fish tank. The water is all cloudy. There's a statue of a cat overlooking the tank.",
+			exits: {
+				'north': {
+					roomId: 'NN-5',
+					description: 'a flight of stairs'
+				},
+				'south': {
+					roomId: '0-9-3',
+					description: 'a room'
+				}
+			}
+		},
+		'T-9': {
+			roomId: 'T-9',
+			description: "You are at the bottom of a narrow flight of stairs.",
+			interactables: {
+				'green-cabinet': {
+					name: 'A CABINET with a green lock',
+					description: 'A majestic wooden CABINET with a tiny green lock securing it',
+					keywords: ['cabinet'],
+					interactions: {
+						'open': {
+							requires: ['green-key'],
+							yields: {
+								displayText: 'You open the cabinet and find a PERIDOT SHOT GLASS.',
+								item: {
+									id: 'peridot-shot-glass',
+									name: 'A PERIDOT SHOT GLASS',
+									description: 'A double tall SHOT GLASS made of Peridot. Seems expensive',
+									keywords: ['shot glass', 'peridot shot glass']
+								}
+							}
+						}
+					}
+				}
+			},
+			exits: {
+				'south': {
+					roomId: '0-11-3',
+					description: 'a large room'
+				},
+				'up': {
+					roomId: 'T-8',
+					description: 'a landing'
+				}
+			}
+		},
+
+		// ROW 9
+		'0-0-1': {
+			roomId: '0-0-1',
+			description: "You are at one end of a hallway. There is a spiral staircase here. You realize that you hate spiral staircases.",
+			exits: {
+				'east': {
+					roomId: '0-1-1',
+					description: 'more of the same hallway'
+				},
+				'up': {
+					roomId: '1-0-1',
+					description: 'a landing'
+				}
+			}
+		},
+		'0-1-1': {
+			roomId: '0-1-1',
+			description: "You are in a hallway. It looks like one of the two million hallways you've already seen. Oh look, it has walls.",
+			exits: {
+				'west': {
+					roomId: '0-0-1',
+					description: 'one end of the hallway'
+				},
+				'east': {
+					roomId: '0-2-1',
+					description: 'more of the same hallway'
+				}
+			}
+		},
+		'0-2-1': {
+			roomId: '0-2-1',
+			description: "You are in a hallway. There sure are a lot of hallway in this house.",
+			exits: {
+				'west': {
+					roomId: '0-1-1',
+					description: 'part of the same hallway'
+				},
+				'south': {
+					roomId: '0-2-2',
+					description: 'more of the same hallway'
+				}
+			}
+		},
+		'A-7': {
+			roomId: 'A-7',
+			description: "You are in a dimly lit room. There is a table here and some paper. The paper is blank. You contemplate writing a message for the next fool who comes through, but don't.",
+			exits: {
+				'north': {
+					roomId: 'A-6',
+					description: 'a flight of stairs'
+				},
+				'up': {
+					roomId: 'A-8',
+					description: 'a room'
+				}
+			}
+		},
+		'0-4-1': {
+			roomId: '0-4-1',
+			description: "You are in a small room with a low ceiling. You kind of feel like Alice in Wonderland now. You wonder when the White Rabbit is going to show up.",
+			exits: {
+				'north': {
+					roomId: '0-4-0',
+					description: 'a brightly lit room'
+				},
+				'south': {
+					roomId: '0-4-2',
+					description: 'a hallway'
+				}
+			}
+		},
+		'0-7-1': {
+			roomId: '0-7-1',
+			description: "You are at one end of a hallway. There are paint blots on the wall. You are unsure if they were intentional.",
+			exits: {
+				'north': {
+					roomId: 'I-1',
+					description: 'a room'
+				},
+				'south': {
+					roomId: '0-7-2',
+					description: 'part of the same hallway'
+				}
+			}
+		},
+		'NN-5': {
+			roomId: 'NN-5',
+			description: "You are at the bottom of a flight of stairs.",
+			interactables: {
+				'hunny-bear': {
+					name: 'A statue of a bear wearing a red shirt and no pants.',
+					description: 'The beat statue has its hands outstretched, as if it wants something put in them',
+					keywords: ['bear'],
+					interactions: {
+						'put': {
+							requires: ['honey-jar'],
+							requiredInput: { itemId: 'honey-jar' }, // Any keyword for this item is usable
+							yields: {
+								displayText: 'The bear turns around, and attached to its back is an OPAL CLIPBOARD',
+								item: {
+									id: 'opal-clipboard',
+									name: 'An OPAL CLIPBOARD',
+									description: 'A rather shiny OPAL CLIPBOARD, complete with a cheap pen',
+									keywords: ['clipboard', 'opal clipboard']
+								}
+							}
+						}
+					}
+				}
+			},
+			exits: {
+				'south': {
+					roomId: '0-9-2',
+					description: 'a room'
+				},
+				'up': {
+					roomId: 'NN-4',
+					description: 'a landing'
+				}
+			}
+		},
+		'0-11-1': {
+			roomId: '0-11-1',
+			description: "You are at the bottom of a flight of stairs.",
+			exits: {
+				'north': {
+					roomId: '0-11-0',
+					description: 'a bathroom'
+				},
+				'up': {
+					roomId: '1-11-1',
+					description: 'a landing'
+				}
+			}
+		},
+
+		// ROW 10
+		'A-1': {
+			roomId: 'A-1',
+			description: "You are in a woodworking shop of sorts. There are wood shavings everywhere. You think you see some footprints in the dust.",
+			items: {
+				'rusty-saw': {
+					id: 'rusty-saw',
+					keywords: ['saw'],
+					name: 'a rusty SAW',
+					description: 'A rather well-used and rusted SAW with a sticker on it reading "Julia South"'
+				}
+			},
+			exits: {
+				'south': {
+					roomId: '0-2-1',
+					description: 'a hallway'
+				},
+				'up': {
+					roomId: 'A-2',
+					description: 'a room'
+				}
+			}
+		},
+		'A-6': {
+			roomId: 'A-6',
+			description: "You are at the bottom of a flight of stairs. It's really dusty here. Your allergies start acting up.",
+			exits: {
+				'south': {
+					roomId: 'A-7',
+					description: 'a room'
+				},
+				'up': {
+					roomId: 'A-5',
+					description: 'a dark landing'
+				}
+			}
+		},
+		'0-4-0': {
+			roomId: '0-4-0',
+			description: "You are in a fairly brightly lit room. It is lit by an electrical light. Who is paying the electrical bill?",
+			exits: {
+				'south': {
+					roomId: '0-4-1',
+					description: 'a room'
+				},
+				'east': {
+					roomId: 'I-3',
+					description: 'a ladder'
+				}
+			}
+		},
+		'I-3': {
+			roomId: 'I-3',
+			description: "You are at the bottom of a ladder. The rungs look a little suspect.",
+			exits: {
+				'east': {
+					roomId: 'I-2',
+					description: 'a room'
+				},
+				'up': {
+					roomId: 'I-4',
+					description: 'a landing',
+					elevationType: 'ladder'
+				}
+			}
+		},
+		'I-2': {
+			roomId: 'I-2',
+			description: "You are in a room full of mannequins. Not all of them are dressed. You clutch at your imaginary pearls at the indecency.",
+			exits: {
+				'west': {
+					roomId: 'I-3',
+					description: 'a ladder'
+				},
+				'east': {
+					roomId: 'I-1',
+					description: 'another room'
+				}
+			}
+		},
+		'I-1': {
+			roomId: 'I-1',
+			description: "You are in a room full of sports equipment. Well, rather old and broken sports equipment.",
+			items: {
+				'tennis-racket': {
+					id: 'tennis-racket',
+					keywords: ['racket', 'tennis racket'],
+					name: 'a shiny TENNIS RACKET',
+					description: 'A well maintained TENNIS RACKET, with "Jimmy East" etched on its side'
+				}
+			},
+			exits: {
+				'west': {
+					roomId: 'I-2',
+					description: 'another room'
+				},
+				'south': {
+					roomId: '0-7-1',
+					description: 'a hallway'
+				}
+			}
+		},
+		'0-11-0': {
+			roomId: '0-11-0',
+			description: "You are in a bathroom. It looks bigger than the bathroom you have at home. Yes, it's THAT large.",
+			exits: {
+				'south': {
+					roomId: '0-11-1',
+					description: 'a flight of stairs'
+				}
+			}
+		},
+
+		// === End of ground floor ===
+
+		// === Begin Floor 1 ===
+		// Row 0 (from top)
+		'A-2': {
+			roomId: 'A-2',
+			description: "This room makes you feel tired. Best to move along. It's not even really a room...",
+			exits: {
+				'up': {
+					roomId: 'A-3',
+					description: 'a landing'
+				},
+				'down': {
+					roomId: 'A-1',
+					description: 'a wood shop'
+				}
+			}
+		},
+		'A-5': {
+			roomId: 'A-5',
+			description: "You are in a dark space between floors. Up or down, your choice.",
+			exits: {
+				'up': {
+					roomId: 'A-4',
+					description: 'a landing'
+				},
+				'down': {
+					roomId: 'A-6',
+					description: 'solid ground'
+				}
+			}
+		},
+		'1-4-0': {
+			roomId: '1-4-0',
+			description: "You are in a small room. There is a window overlooking a garden. You are unimpressed by the view.",
+			exits: {
+				'south': {
+					roomId: '1-4-1',
+					description: 'a hallway'
+				},
+				'east': {
+					roomId: 'I-4',
+					description: 'a ladder'
+				}
+			}
+		},
+		'I-4': {
+			roomId: 'I-4',
+			description: "You are at the top of a rather suspect looking ladder. You start thinking about where the nearest emergency room is.",
+			exits: {
+				'east': {
+					roomId: 'I-5',
+					description: 'another ladder'
+				},
+				'down': {
+					roomId: 'I-3',
+					description: 'rock bottom',
+					elevationType: 'ladder'
+				}
+			}
+		},
+		'I-5': {
+			roomId: 'I-5',
+			description: "You are at the bottom of a rather unstable looking ladder. You think you hear someone breathing. That might just be your imagination.",
+			exits: {
+				'west': {
+					roomId: 'I-4',
+					description: 'another crappy ladder'
+				},
+				'up': {
+					roomId: 'I-6',
+					description: 'a room',
+					elevationType: 'ladder'
+				}
+			}
+		},
+
+		// Row 1
+		
 	}
 }
 // var GAMEMAP = {
