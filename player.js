@@ -26,20 +26,7 @@ class Player {
 	constructor(id, socket) {
 		this.d_id = id;
 		this.d_socket = socket;
-		this.d_inventory = {
-			'ruby-slippers': true,
-			'diamond-necklace': true,
-			'aquamarine-ring': true,
-			'peridot-shot-glass': true,
-			'opal-clipboard': true,
-			'emerald-slippers': true,
-			'amethyst': true,
-			'topaz-token': true,
-			'sapphire': true,
-			'garnet-medal': true,
-			'pearl': true,
-			'tanzanite-dagger': true
-		};
+		this.d_inventory = {};
 		this.d_roomsExplored = {};
 		var gameMapCopy = JSON.parse(JSON.stringify(gameMap));
 		this.d_map = new HouseMap(gameMapCopy);
