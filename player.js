@@ -1,6 +1,21 @@
 var gameMap = require('./game-map');
 var HouseMap = require('./map');
 
+var BASIC_MOVES = [
+	'move [north/east/south/west/up/down] - Move yo\'self',
+	'n/s/e/w/u/d - Shorthand for moving yo\'self',
+	'look - Check out your surroundings',
+	'look [item] - Investigate an object more closely',
+	'take [item] - Pillage the current room and relieve it of said item',
+	'inventory - See the spoils of your grave robbing'
+];
+
+var CUSTOM_MOVE_DESCRIPTIONS = {
+	'put': 'put [item] - Take a beloved object of yours and offer it as a sacrifice',
+	'open': 'open [item] - Attempt to gain access to item',
+	//'text': 'text <message> - Uhm, I don\'t know, send a text message?'
+}
+
 var WELCOME_MESSAGE = 
 	'<p>' + 
 	'Oh, hello there! You seem to have found yourself in a most peculiar position. ' +
@@ -31,6 +46,8 @@ class Player {
 
 		this.d_socket.on('command', this.handleCommand.bind(this));
 
+		this.d_helpCounter = 0;
+
 		// Emit the welcome message
 		this.sendMessage(WELCOME_MESSAGE);
 	}
@@ -39,12 +56,48 @@ class Player {
 		this.d_socket.emit('message', message);
 	}
 
+	printHelp() {
+		this.d_helpCounter++;
+		var helpMessage = '';
+
+		if (this.d_helpCounter === 1) {
+			helpMessage = "<p>Right, I forgot to tell you stuff... Here are the things you can do:</p>"
+		}
+		else if (this.d_helpCounter === 2) {
+			helpMessage = "<p>Really, the first time wasn't enough? Fine. Here are the things you can do:</p>";
+		}
+		else if (this.d_helpCounter < 5) {
+			helpMessage = "<p>You don't learn real good, do you? Here are the things you can do:</p>"
+		}
+		else {
+			helpMessage = "<p>This is getting real old, real quick. Here:</p>"
+		}
+
+		helpMessage += "<p>";
+		for (var i = 0; i < BASIC_MOVES.length; i++) {
+			helpMessage += BASIC_MOVES[i] + "<br />"
+		}
+
+		var customActions = this.d_map.currentRoomSpecialActions();
+		for (var i = 0; i < customActions.length; i++) {
+			if (CUSTOM_MOVE_DESCRIPTIONS[customActions[i]]) {
+				helpMessage += CUSTOM_MOVE_DESCRIPTIONS[customActions[i]] + "<br />";
+			}
+		}
+		helpMessage += "</p>";
+
+		this.sendMessage(helpMessage);
+	}
+
 	handleCommand(command) {
 		if (!command) command = '';
 		command = command.toLowerCase();
 
 		var parsed = this.parseCommand(command);
 		switch (parsed.type) {
+			case 'help': {
+				this.printHelp();
+			} break;
 			case 'move': {
 				var result = this.d_map.move(parsed.direction);
 				if (result) {
@@ -167,6 +220,12 @@ class Player {
 		}
 
 		switch (commandParts[0]) {
+			case '?':
+			case 'help': {
+				return {
+					type: 'help'
+				};
+			}
 			case 'move': 
 			case 'go': {
 				return {

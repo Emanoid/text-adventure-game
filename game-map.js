@@ -189,6 +189,10 @@ var GAMEMAP = {
 				'east': {
 					roomId: '0-7-8',
 					description: 'a room'
+				},
+				'south': {
+					roomId: 'entry-hall',
+					description: 'the entry hall'
 				}
 			}
 		},
