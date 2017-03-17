@@ -16,12 +16,14 @@ var GAMEMAP = {
 		// Row 1 (from bottom)
 		'entry-hall': {
 			roomId: 'entry-hall',
-			description: "You are in the entrance hall of the mansion. There are a lot of cobwebs.",
+			description: "You are in the entrance hall of the mansion. There are a lot of cobwebs. There's a note on the wall saying " +
+						 "'To succeed, one must remember where one taketh and where one giveth'. Which weirdo wrote that?" ,
 			exits: {
-				'south': {
-					description: 'the Front Door',
-					roomId: 'outside'
-				},
+				// 'south': {
+				// 	description: 'the Front Door',
+				// 	roomId: 'outside'
+				// },
+				// There's no escape!
 				'north': {
 					roomId: 'grand-staircase',
 					description: 'a grand staircase'
@@ -150,7 +152,7 @@ var GAMEMAP = {
 		},
 		'0-3-8': {
 			roomId: '0-3-8',
-			description: "You are in a long hallway. It's a rather generic looking hallway",
+			description: "You are in a long hallway. It's a rather generic looking hallway. There are some scratchings on the wall. It looks like a message. You can barely make it out: 'A journey of more than 12 steps... is way too long'.",
 			exits: {
 				'west': {
 					roomId: '0-2-8',
@@ -248,7 +250,7 @@ var GAMEMAP = {
 		},
 		'0-7-7': {
 			roomId: '0-7-7',
-			description: "You are in a hallway. There are paintings of old people. The paintings look faded.",
+			description: "You are in a hallway. There are paintings of old people. The paintings look faded. One of the paintings has a scribble on it. It reads 'Directionality Is Practicality'",
 			exits: {
 				'north': {
 					roomId: '0-7-6',
@@ -410,11 +412,16 @@ var GAMEMAP = {
 					keywords: ['phone', 'cellphone'],
 					interactions: {
 						'text': {
-							requires: [], //TODO list all items
+							requires: ['ruby-slippers', 'diamond-necklace', 'aquamarine-ring', 'peridot-shot-glass',
+									   'opal-clipboard', 'emerald-slippers', 'amethyst', 'topaz-token',
+									   'sapphire', 'garnet-medal', 'pearl', 'tanzanite-dagger'], 
 							requiredInput: 'hauntings', // The input required for this command
-							isActive: 'when-requirements-met', // This is only a valid action when the requirements are met, if undefined, assumed to be active
 							yields: {
-								displayText: 'TODO Something something act 2 here',
+								displayText: '<p>The phone beeps happily. A message appears on the screen.</p>' + 
+											 '<p>"Oh, hello! I\'m glad you found me. I\'m stuck, and you\'re my only hope."</p>' +
+											 '<p>"Tell them my name is Elvira"</p>' +
+											 '<p>NOTE from ZQ: I might add a part II to this, it is as yet unclear</p>',
+								preformatted: true
 							}
 						}
 					}
@@ -2660,7 +2667,7 @@ var GAMEMAP = {
 			description: "You are in a large room with a very large window. This must have been a workshop of some sort. There is a metal track running all over the room. It looks like a Rube Goldberg machine of sorts. There is a circular opening in a corner. There is also a narrow set of stairs.",
 			interactables: {
 				'rube-goldberg-machine': {
-					hidden: true
+					hidden: true,
 					name: 'A crazy Rube Goldberg Machine',
 					description: 'A ridiculously over-engineered Rube Goldberg Machine, with pipes, weights, pulleys and... a pony?',
 					keywords: ['machine', 'rube goldberg machine'],
@@ -2961,7 +2968,7 @@ var GAMEMAP = {
 			description: "You are at one end of a rather long, dismal looking hallway. There's a birdcage here though.",
 			interactables: {
 				'weird-birdcage': {
-					hidden: true
+					hidden: true,
 					name: 'A birdcage',
 					description: "There's a block of cheese in the cage",
 					keywords: ['birdcage']
@@ -3109,7 +3116,7 @@ var GAMEMAP = {
 						}
 					}
 				}
-			}
+			},
 			exits: {
 				'north': {
 					roomId: '2-3-10',
@@ -3131,7 +3138,7 @@ var GAMEMAP = {
 				},
 				'down': {
 					roomId: 'SSS-6',
-					description: 'the bottom floor of the loft'
+					description: 'the bottom floor of the loft',
 					elevationType: 'ladder'
 				}
 			}

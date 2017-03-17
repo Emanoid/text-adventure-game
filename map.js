@@ -35,7 +35,7 @@ class Map {
 		for (var itemId in items) {
 			var currItem = items[itemId];
 
-			if (currItem.keywords.indexOf(itemDesc) !== -1) {
+			if (currItem.keywords && currItem.keywords.indexOf(itemDesc) !== -1) {
 				return currItem;
 			}
 		}
@@ -59,8 +59,20 @@ class Map {
 		}
 	}
 
-	look(itemDesc) {
-		// TODO look in inventory as well
+	look(itemDesc, inventory) {
+		// Inventory first
+		if (inventory) {
+			var invResult = this.hasItem(inventory, itemDesc);
+			if (invResult) {
+				return {
+					success: true,
+					itemId: invResult.id,
+					item: invResult
+				};
+			}
+		}
+
+		// room items
 		var itemResult = this.hasItem(this.d_currentRoom.items, itemDesc);
 		if (itemResult) {
 			return {
@@ -70,7 +82,8 @@ class Map {
 			};
 		}
 
-		itemResult = this.hasItem(this.d_currentRoom.actionableItems, itemDesc);
+		// room interactables
+		itemResult = this.hasItem(this.d_currentRoom.interactables, itemDesc);
 		if (itemResult) {
 			return {
 				success: true,
@@ -106,8 +119,30 @@ class Map {
 					roomString += '.';
 				}
 			}
-			roomString += '<p>';
+			roomString += '</p>';
 		}
+
+		// Interactables
+		if (this.d_currentRoom.interactables && Object.keys(this.d_currentRoom.interactables).length > 0) {
+			// Assume only 1 interactable
+			var interactableString = '<p>There is ';
+			var visibleInteractables = 0;
+
+			for (var interactableId in this.d_currentRoom.interactables) {
+				var interactable = this.d_currentRoom.interactables[interactableId];
+				if (!interactable.hidden) {
+					// not a hidden one
+					interactableString += interactable.name;
+					visibleInteractables++;
+				}
+			}
+
+			if (visibleInteractables > 0) {
+				interactableString += '</p>';
+				roomString += interactableString;
+			}
+		}
+
 
 		if (this.d_currentRoom.exits && Object.keys(this.d_currentRoom.exits).length > 0) {
 			roomString += '<p>';
@@ -134,6 +169,154 @@ class Map {
 			roomString += '</p>';
 		}
 		return roomString;
+	}
+
+	// A list of custom actions for the current room
+	currentRoomSpecialActions() {
+		var ret = [];
+		if (this.d_currentRoom.interactables) {
+			for (var interactableId in this.d_currentRoom.interactables) {
+				var interactable = this.d_currentRoom.interactables[interactableId];
+				// TODO
+				if (interactable.interactions) {
+					for (var interactionType in interactable.interactions) {
+						ret.push(interactionType)
+					}
+				}
+			}
+		}
+
+		return ret;
+	}
+
+	//handle custom action
+	customAction(actionType, params, inventory) {
+		var ret = {};
+		if (this.d_currentRoom.interactables) {
+			for (var interactableId in this.d_currentRoom.interactables) {
+				var interactable = this.d_currentRoom.interactables[interactableId];
+				if (interactable.interactions && interactable.interactions[actionType]) {
+					var interaction = interactable.interactions[actionType];
+					// This is a valid interaction
+					// special case handling
+					if (actionType === 'open') {
+						// easy one, just validate the requirements
+						var validation = true;
+						for (var i = 0; i < interaction.requires.length; i++) {
+							if (!inventory[interaction.requires[i]]) {
+								validation = false;
+								break;
+							}
+						}
+
+						if (validation) {
+							var reward = interaction.yields;
+							if (reward.item) {
+								// Add to the current room items list
+								if (!this.d_currentRoom.items) {
+									this.d_currentRoom.items = {};
+								}
+								this.d_currentRoom.items[reward.item.id] = reward.item;
+								delete reward.item;
+							}
+
+							return {
+								success: true,
+								message: reward.displayText
+							};
+						}
+						else {
+							return {
+								success: false,
+								message: "You can't open that"
+							}
+						}
+					}
+					else if (actionType === 'put') {
+						// params contains the item name
+						// validate first
+						var validation = true;
+						var requirements = [];
+						for (var i = 0; i < interaction.requires.length; i++) {
+							requirements.push(interaction.requires[i]);
+
+							if (!inventory[interaction.requires[i]]) {
+								validation = false;
+								break;
+							}
+						}
+
+						if (validation) {
+							// now check that we can actually do this
+							if (this.hasItem(inventory, params)) {
+								var reward = interaction.yields;
+								if (reward.item) {
+									// Add to current room items list
+									if (!this.d_currentRoom.items) {
+										this.d_currentRoom.items = {};
+									}
+									this.d_currentRoom.items[reward.item.id] = reward.item;
+									delete reward.item;
+								}
+
+								// Remove the 'put' item from the inventory
+								for (var i = 0; i < requirements.length; i++) {
+									delete inventory[requirements[i]];
+								}
+
+								return {
+									success: true,
+									message: "<p>" + reward.displayText + "</p>"
+								};
+							}
+							else {
+								return {
+									success: false,
+									message: "<p>Um, what exactly are you trying to 'put'?</p>"
+								}
+							}
+						}
+						else {
+							return {
+								success: false,
+								message: "<p>Um, what exactly are you trying to 'put'?</p>"
+							}
+						}
+					}
+					else if (actionType === 'text') {
+						var validation = true;
+						for (var i = 0; i < interaction.requires.length; i++) {
+							if (!inventory[interaction.requires[i]]) {
+								validation = false;
+								break;
+							}
+						}
+
+						if (validation) {
+							if (params === interaction.requiredInput) {
+								var reward = interaction.yields;
+								return {
+									success: true,
+									message: "<p>" + reward.displayText + "</p>"
+								}
+							}
+							else {
+								return {
+									success: false,
+									message: "<p>The phone beeps menacingly at you. It sounds annoyed.</p>"
+								}
+							}
+						}
+						else {
+							return {
+								success: false,
+								message: "<p>I don't understand how to '" + actionType + ' ' + params + "'</p>"
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	// d_map holds an object with room IDs as keys and room entries as values

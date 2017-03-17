@@ -11,9 +11,23 @@ class Player {
 	constructor(id, socket) {
 		this.d_id = id;
 		this.d_socket = socket;
-		this.d_inventory = {};
+		this.d_inventory = {
+			'ruby-slippers': true,
+			'diamond-necklace': true,
+			'aquamarine-ring': true,
+			'peridot-shot-glass': true,
+			'opal-clipboard': true,
+			'emerald-slippers': true,
+			'amethyst': true,
+			'topaz-token': true,
+			'sapphire': true,
+			'garnet-medal': true,
+			'pearl': true,
+			'tanzanite-dagger': true
+		};
 		this.d_roomsExplored = {};
-		this.d_map = new HouseMap(gameMap);
+		var gameMapCopy = JSON.parse(JSON.stringify(gameMap));
+		this.d_map = new HouseMap(gameMapCopy);
 
 		this.d_socket.on('command', this.handleCommand.bind(this));
 
@@ -48,7 +62,7 @@ class Player {
 				else {
 					// TODO 
 					
-					var result = this.d_map.look(parsed.target);
+					var result = this.d_map.look(parsed.target, this.d_inventory);
 					if (result.success) {
 						this.sendMessage("<p>" + result.item.description + "</p>");
 					}
@@ -93,6 +107,11 @@ class Player {
 				inventoryString += '</p>';
 				this.sendMessage(inventoryString);
 			} break;
+			case 'custom': {
+				// Let the map handle this
+				var customResult = this.d_map.customAction(parsed.action, parsed.params, this.d_inventory);
+				this.sendMessage(customResult.message);
+			} break;
 			case 'unknown':
 			default: {
 				this.sendMessage("<p>I don't understand how to '" + parsed.rawCommand + "'</p>");
@@ -108,6 +127,42 @@ class Player {
 			if (commandParts[i].length === 0) {
 				commandParts.splice(i, 1);
 				i--;
+			}
+		}
+
+		// Special case for single word command (movements)
+		if (commandParts.length === 1) {
+			switch(commandParts[0]) {
+				case 'n':
+				case 'north': {
+					commandParts[0] = 'go';
+					commandParts[1] = 'north';
+				} break;
+				case 'e':
+				case 'east': {
+					commandParts[0] = 'go';
+					commandParts[1] = 'east';
+				} break;
+				case 's':
+				case 'south': {
+					commandParts[0] = 'go';
+					commandParts[1] = 'south';
+				} break;
+				case 'w':
+				case 'west': {
+					commandParts[0] = 'go';
+					commandParts[1] = 'west';
+				} break;
+				case 'u':
+				case 'up': {
+					commandParts[0] = 'go';
+					commandParts[1] = 'up';
+				} break;
+				case 'd':
+				case 'down': {
+					commandParts[0] = 'go';
+					commandParts[1] = 'down';
+				} break;
 			}
 		}
 
@@ -140,6 +195,15 @@ class Player {
 				}
 			}
 			default: {
+				if (this.d_map.currentRoomSpecialActions().indexOf(commandParts[0]) !== -1) {
+					return {
+						type: 'custom',
+						action: commandParts[0],
+						params: commandParts.length > 1 ? commandParts.slice(1).join(' ') : undefined,
+						rawCommand: command
+					}
+				}
+
 				return {
 					type: 'unknown',
 					rawCommand: command
