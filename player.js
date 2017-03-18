@@ -152,6 +152,10 @@ class Player {
 				var customResult = this.d_map.customAction(parsed.action, parsed.params, this.d_inventory);
 				this.sendMessage(customResult.message);
 			} break;
+			// DEBUG
+			case 'debug-location': {
+				this.sendMessage(this.d_map.d_currentRoom.roomId);
+			} break;
 			case 'unknown':
 			default: {
 				this.sendMessage("<p>I don't understand how to '" + parsed.rawCommand + "'</p>");
@@ -212,6 +216,11 @@ class Player {
 				return {
 					type: 'help'
 				};
+			}
+			case 'whereami': {
+				return {
+					type: 'debug-location',
+				}
 			}
 			case 'move': 
 			case 'go': {
