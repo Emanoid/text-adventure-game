@@ -2048,7 +2048,7 @@ var GAMEMAP = {
 			roomId: 'G-4',
 			description: "You are at the bottom of a flight of sponge-padded stairs.",
 			exits: {
-				'west': {
+				'east': {
 					roomId: 'G-5',
 					description: 'a flight of stairs'
 				},
