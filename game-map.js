@@ -2268,6 +2268,10 @@ var GAMEMAP = {
 				'south': {
 					roomId: '2-6-1',
 					description: 'a hallway'
+				},
+				'down': {
+					roomId: 'I-5',
+					description: 'the lower floor'
 				}
 			}
 		},
