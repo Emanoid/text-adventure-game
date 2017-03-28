@@ -10,8 +10,47 @@ var GAMEMAP = {
                "I mean hanging out here</p>" + 
                "<p>*** Use the TEXT box at the bottom to navigate the world ***</p>",
     preformattedIntroText: true,
+	catridgeId: 'mystery-house', // Use this to load the actual map
+
 	map: {
-		
+		'outside': {
+			roomId: 'outside',
+			description: 'You are standing outside a rather large house on a small hill. It looks a little creepy.',
+			exits: {
+				'north': {
+					roomId: '0-3-8',
+					description: 'the Front Door'
+				}
+			}
+		},
+
+		// Level 0, row 8
+		'0-0-8': {
+			roomId: '0-0-8',
+			description: "You are at the bottom of a large flight of stairs. The handrails are decorated with lion heads.",
+			exits: {
+				'north': {
+					roomId: 'phone-room',
+					description: 'a room'
+				},
+				'up': {
+					roomId: '1-0-8',
+					description: 'the floor above'
+				}
+			}
+		},
+		'0-3-8': {
+			roomId: '0-3-8',
+			description: "You are in an entry hallway. There are a couple of stone lions here. There is also a a note on the wall that reads 'Remember where one take-th, and where one put-eth or open-eth, or use-eth'. Which weirdo wrote that?",
+			exits: {
+				'north': {
+					roomId: '0-3-7',
+					description: 'a foyer'
+				}
+			}
+		},
+
+		// Level 0, row 7	
 	}
 }
 /*
