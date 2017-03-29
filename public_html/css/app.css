@@ -54,3 +54,9 @@ body {
 .console-entry.user-command::before {
 	content: '> ';
 }
+
+.cmdline-text {
+	color: #FFF;
+	font-family: Courier New, Courier, sans-serif;
+	padding-top: 7px
+}

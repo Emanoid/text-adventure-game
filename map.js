@@ -150,12 +150,20 @@ class Map {
 				var dir = LEGAL_DIRECTIONS[i];
 				var dirText = 'To the ' + dir + ' is ';
 				if (dir === 'up' || dir === 'down') {
-					var elevationType = 'stairs'
+					var elevString = 'A set of stairs lead ' + dir + ' to ';
 					if (this.d_currentRoom.exits[dir] && 
 						this.d_currentRoom.exits[dir].elevationType !== undefined) {
-						elevationType = this.d_currentRoom.exits[dir].elevationType;
+						elevString = 'A ' + this.d_currentRoom.exits[dir].elevationType;
+						if (this.d_currentRoom.exits[dir].tense === 'singular') {
+							elevString += ' leads ';
+						}
+						else {
+							elevString += ' lead ';
+						}
+						elevString += dir + ' to ';
 					}
-					dirText = 'A set of ' + elevationType + ' lead ' + dir + ' to ';
+					
+					dirText = elevString;
 				}
 
 				if (this.d_currentRoom.exits[dir]) {

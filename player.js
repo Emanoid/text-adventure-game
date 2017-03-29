@@ -1,4 +1,4 @@
-var gameMap = require('./game-map');
+var gameMap = require('./game-map2');
 var HouseMap = require('./map');
 
 var BASIC_MOVES = [
@@ -13,6 +13,7 @@ var BASIC_MOVES = [
 var CUSTOM_MOVE_DESCRIPTIONS = {
 	'put': 'put [item] - Take a beloved object of yours and offer it as a sacrifice',
 	'open': 'open [item] - Attempt to gain access to item',
+	'use': 'use [item] - Make use of an item in the room or in your posession',
 	//'text': 'text <message> - Uhm, I don\'t know, send a text message?'
 }
 
@@ -36,7 +37,16 @@ class Player {
 		this.d_helpCounter = 0;
 
 		// Emit the welcome message
-		this.sendMessage(WELCOME_MESSAGE);
+		var welcomeMessage = WELCOME_MESSAGE;
+		if (gameMapCopy.introText) {
+			if (!gameMapCopy.preformattedIntroText) {
+				welcomeMessage = "<p>" + gameMapCopy.introText + "</p>";
+			}
+			else {
+				welcomeMessage = gameMapCopy.introText;
+			}
+		}
+		this.sendMessage(welcomeMessage);
 	}
 
 	sendMessage(message) {

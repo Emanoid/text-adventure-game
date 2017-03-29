@@ -3,9 +3,10 @@ var GAMEMAP = {
 	startingRoom: 'outside',
     introText: "<p>You! Hey you! I have a job for you. There's a house over that hill and people have been " +
                "hearing some weird noises coming from it. I'll make it worth your while if you go over there " + 
-               "and investigate! Take lots of notes, I want to know all the details!. Just over that hill. Go!</p>" +
+               "and investigate! Take lots of notes, draw diagrams, I want to know all the details!. Just over that hill. Go!</p>" +
                "<p>Oh wait! Never let it be said that I'm not helpful. Here's a simple TEXT communitron. Just type " +
                "in what you're up to or what you plan to do, and I'll get that information too. If you run into problems " +
+			   "or just can't figure out what to do " +
                "just type in 'help' or '?'. You got all that? Good. Now go forth and explore! I'll be hiding, uh " +
                "I mean hanging out here</p>" + 
                "<p>*** Use the TEXT box at the bottom to navigate the world ***</p>",
@@ -62,9 +63,7 @@ var GAMEMAP = {
 					keywords: ['phone', 'cellphone'],
 					interactions: {
 						'text': {
-							requires: ['ruby-slippers', 'diamond-necklace', 'aquamarine-ring', 'peridot-shot-glass',
-									   'opal-clipboard', 'emerald-slippers', 'amethyst', 'topaz-token',
-									   'sapphire', 'garnet-medal', 'pearl', 'tanzanite-dagger'], 
+							requires: ['emerald-shot-glass', 'diamond-necklace', 'amethyst', 'garnet-medal', 'aquamarine-ring', 'pearl-clipboard'], 
 							requiredInput: 'hauntings', // The input required for this command
 							yields: {
 								displayText: '<p>The phone beeps happily. A message appears on the screen.</p>' + 
@@ -143,12 +142,12 @@ var GAMEMAP = {
 							requires: ['honey-jar'],
 							requiredInput: { itemId: 'honey-jar' }, // Any keyword for this item is usable
 							yields: {
-								displayText: 'The bear turns around, and attached to its back is an OPAL CLIPBOARD',
+								displayText: 'The bear turns around, and attached to its back is a PEARL CLIPBOARD',
 								item: {
-									id: 'opal-clipboard',
-									name: 'An OPAL CLIPBOARD',
-									description: 'A rather shiny OPAL CLIPBOARD, complete with a cheap pen',
-									keywords: ['clipboard', 'opal clipboard']
+									id: 'pearl-clipboard',
+									name: 'a PEARL CLIPBOARD',
+									description: 'A rather shiny PEARL CLIPBOARD, complete with a cheap pen',
+									keywords: ['clipboard', 'pearl clipboard']
 								}
 							}
 						}
@@ -252,7 +251,7 @@ var GAMEMAP = {
 		},
 		'0-5-6': {
 			roomId: '0-5-6',
-			description: "ou are in a small hallway. There is a window open on one side. A cool breeze blows in. And chills you to your bones.",
+			description: "You are in a small hallway. There is a window open on one side. A cool breeze blows in. And chills you to your bones.",
 			exits: {
 				'west': {
 					roomId: '0-4-6',
@@ -303,7 +302,8 @@ var GAMEMAP = {
 				'up': {
 					roomId: 'T-2',
 					description: 'a landing',
-					elevationType: 'ladder'
+					elevationType: 'ladder',
+					tense: 'singular'
 				}
 			}
 		},
@@ -368,8 +368,9 @@ var GAMEMAP = {
 					description: "A weird looking jukebox. It apparently wants shiny coins. A peeling label on it reads 'Take it from the Top'.",
 					keywords: ['jukebox'],
 					interactions: {
-						'use': {
+						'put': {
 							requires: ['silver-coin'],
+							requiredInput: { itemId: 'silver-coin' },
 							yields: {
 								displayText: 'The jukebox starts playing the theme from Ghostbusters, and a DIAMOND NECKLACE falls from a hidden slot.',
 								item: { // an item that's added to the room items
@@ -571,7 +572,8 @@ var GAMEMAP = {
 				'up': {
 					roomId: 'A-9',
 					description: 'the upper floor',
-					elevationType: 'ladder'
+					elevationType: 'ladder',
+					tense: 'singular'
 				}
 			}
 		},
@@ -698,7 +700,7 @@ var GAMEMAP = {
 				'purple-key': {
 					id: 'purple-key',
 					keywords: ['purple key'],
-					name: 'A PURPLE KEY',
+					name: 'a PURPLE KEY',
 					description: "A plain purple key, with a label that reads 'Top of the Rose'"
 				}
 			},
@@ -710,7 +712,8 @@ var GAMEMAP = {
 				'up': {
 					roomId: 'A-2',
 					description: 'a landing',
-					elevationType: 'ladder'
+					elevationType: 'ladder',
+					tense: 'singular'
 				}
 			}
 		},
@@ -723,12 +726,14 @@ var GAMEMAP = {
 				'down': {
 					roomId: 'A-1',
 					description: 'the ground floor',
-					elevationType: 'ladder'
+					elevationType: 'ladder',
+					tense: 'singular'
 				},
 				'up': {
 					roomId: 'A-3',
 					description: 'the floor above',
-					elevationType: 'ladder'
+					elevationType: 'ladder',
+					tense: 'singular'
 				}
 			}
 		},
@@ -873,7 +878,8 @@ var GAMEMAP = {
 				'up': {
 					roomId: 'U-5',
 					description: 'a room',
-					elevationType: 'ladder'
+					elevationType: 'ladder',
+					tense: 'singular'
 				}
 			}
 		},
@@ -936,7 +942,8 @@ var GAMEMAP = {
 				'down': {
 					roomId: 'A-10',
 					description: 'the ground floor',
-					elevationType: 'ladder'
+					elevationType: 'ladder',
+					tense: 'singular'
 				}
 			}
 		},
@@ -1042,6 +1049,7 @@ var GAMEMAP = {
 					roomId: '2-5-4',
 					description: 'the upper floor',
 					elevationType: 'ladder',
+					tense: 'singular'
 				}
 			}
 		},
@@ -1293,7 +1301,8 @@ var GAMEMAP = {
 				'up': {
 					roomId: 'Y-8',
 					description: 'a small room',
-					elevationType: 'ladder'
+					elevationType: 'ladder',
+					tense: 'singular'
 				}
 			}
 		},
@@ -1364,7 +1373,8 @@ var GAMEMAP = {
 				'down': {
 					roomId: 'A-2',
 					description: 'a landing',
-					elevationType: 'ladder'
+					elevationType: 'ladder',
+					tense: 'singular'
 				}
 			}
 		},
@@ -1559,7 +1569,8 @@ var GAMEMAP = {
 				'down': {
 					roomId: 'U-4',
 					description: 'a dark room',
-					elevationType: 'ladder'
+					elevationType: 'ladder',
+					tense: 'singular'
 				}
 			}
 		},
@@ -1576,7 +1587,8 @@ var GAMEMAP = {
 				'down': {
 					roomId: 'H-5',
 					description: 'the floor below',
-					elevationType: 'ladder'
+					elevationType: 'ladder',
+					tense: 'singular'
 				}
 			}
 		},
@@ -1669,7 +1681,8 @@ var GAMEMAP = {
 				'down': {
 					roomId: '1-5-4',
 					description: 'a hallway on the floor below',
-					elevationType: 'ladder'
+					elevationType: 'ladder',
+					tense: 'singular'
 				}
 			}
 		},
@@ -1708,7 +1721,8 @@ var GAMEMAP = {
 				'down': {
 					roomId: 'T-2',
 					description: 'the floor below',
-					elevationType: 'ladder'
+					elevationType: 'ladder',
+					tense: 'singular'
 				}
 			}
 		},
@@ -1847,7 +1861,8 @@ var GAMEMAP = {
 				'down': {
 					roomId: 'Y-9',
 					description: 'the floor below',
-					elevationType: 'ladder'
+					elevationType: 'ladder',
+					tense: 'singular'
 				}
 			}
 		}
