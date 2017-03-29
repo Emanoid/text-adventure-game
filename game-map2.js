@@ -1,6 +1,7 @@
 // Herein lies.. the game map
 var GAMEMAP = {
 	startingRoom: 'outside',
+	gameTitle: 'The House... of Mystery!',
     introText: "<p>You! Hey you! I have a job for you. There's a house over that hill and people have been " +
                "hearing some weird noises coming from it. I'll make it worth your while if you go over there " + 
                "and investigate! Take lots of notes, draw diagrams, I want to know all the details!. Just over that hill. Go!</p>" +

@@ -30,20 +30,27 @@ class Player {
 		this.d_inventory = {};
 		this.d_roomsExplored = {};
 		var gameMapCopy = JSON.parse(JSON.stringify(gameMap));
+		this.d_mapInfo = gameMapCopy;
 		this.d_map = new HouseMap(gameMapCopy);
 
 		this.d_socket.on('command', this.handleCommand.bind(this));
 
 		this.d_helpCounter = 0;
 
-		// Emit the welcome message
+		this.d_gameStarted = false;
+
+		this.sendMessage("<p>Welcome to the Text-o-Matic Game Engine</p>" +
+						 "<p>Type 'load [game-name]' to start playing!</p>");
+	}
+
+	printWelcomeMessage() {
 		var welcomeMessage = WELCOME_MESSAGE;
-		if (gameMapCopy.introText) {
-			if (!gameMapCopy.preformattedIntroText) {
-				welcomeMessage = "<p>" + gameMapCopy.introText + "</p>";
+		if (this.d_mapInfo.introText) {
+			if (!this.d_mapInfo.preformattedIntroText) {
+				welcomeMessage = "<p>" + this.d_mapInfo.introText + "</p>";
 			}
 			else {
-				welcomeMessage = gameMapCopy.introText;
+				welcomeMessage = this.d_mapInfo.introText;
 			}
 		}
 		this.sendMessage(welcomeMessage);
@@ -51,6 +58,12 @@ class Player {
 
 	sendMessage(message) {
 		this.d_socket.emit('message', message);
+	}
+
+	printPreStartHelp() {
+		var helpMessage = "<p>Available Commands:</p>";
+		helpMessage += "<ul><li>LOAD [game-name] - Start a game</li></ul>"
+		this.sendMessage(helpMessage);
 	}
 
 	printHelp() {
@@ -91,6 +104,28 @@ class Player {
 		command = command.toLowerCase();
 
 		var parsed = this.parseCommand(command);
+		
+		// If the game hasn't started yet, ignore all commands
+		if (!this.d_gameStarted) {
+			if (parsed.type === 'help') {
+				this.printPreStartHelp();
+				return;
+			}
+			else if (parsed.type === 'load-game') {
+				if (parsed.cartridge === this.d_mapInfo.catridgeId) {
+					this.sendMessage("<p>Loading...</p>");
+					this.sendMessage("<h2>" + this.d_mapInfo.gameTitle + "</h2>")
+					this.d_gameStarted = true;
+					this.printWelcomeMessage();
+				}
+				else {
+					this.sendMessage("<p>Can't load " + parsed.cartridge + "!</p>");
+				}
+				return;
+			}
+			this.sendMessage("<p>INVALID COMMAND</p>");
+		}
+		
 		switch (parsed.type) {
 			case 'help': {
 				this.printHelp();
@@ -231,6 +266,13 @@ class Player {
 				return {
 					type: 'debug-location',
 				}
+			}
+			case 'load': {
+				return {
+					type: 'load-game',
+					cartridge: commandParts.length > 1 ? commandParts.slice(1).join(' ') : undefined,
+					rawCommand: command,
+				};
 			}
 			case 'move': 
 			case 'go': {
