@@ -715,7 +715,170 @@ var GAMEMAP = {
 			}
 		},
 
-		// Floor 1, row 0
+		// Floor 1, row 1
+		'A-2': {
+			roomId: 'A-2',
+			description: "You are on a small landing. It is cramped and dark and you want to go home. Oh stop whining. You have a job to do.",
+			exits: {
+				'down': {
+					roomId: 'A-1',
+					description: 'the ground floor',
+					elevationType: 'ladder'
+				},
+				'up': {
+					roomId: 'A-3',
+					description: 'the floor above',
+					elevationType: 'ladder'
+				}
+			}
+		},
+		'1-6-1': {
+			roomId: '1-6-1',
+			description: "You are in a hallway. Just like one of the fifty million other hallways you've passed in this house.",
+			exits: {
+				'south': {
+					roomId: '1-6-2',
+					description: 'a closet'
+				},
+				'east': {
+					roomId: 'U-3',
+					description: 'a flight of stairs'
+				}
+			}
+		},
+		'U-3': {
+			roomId: 'U-3',
+			description: "You are at the bottom of a sponge-covered flight of stairs. The person who put this here must be pretty well padded. Ha. Ha.",
+			exits: {
+				'west': {
+					roomId: '1-6-1',
+					description: 'a hallway'
+				},
+				'south': {
+					roomId: 'U-4',
+					description: 'a room'
+				},
+				'up': {
+					roomId: 'U-2',
+					description: 'the floor above'
+				}
+			}
+		},
+
+		// Floor 1 row 2
+		'H-6': {
+			roomId: 'H-6',
+			description: "You are in a short hallway. There are rather tastefully made statues of food items. This house is so weird. You find yourself strangely drawn to the statue of a cupcake.",
+			interactables: {
+				'stone-cupcake': {
+					hidden: true,
+					name: 'A stone carved cupcake',
+					description: "A stone carved cupcake, with stone carved frosting and stone carved sprinkles. Biting is NOT recommended.",
+					keywords: ['cupcake', 'stone cupcake'],
+				}
+			},
+			exits: {
+				'south': {
+					roomId: 'H-5',
+					description: 'a ladder'
+				},
+				'east': {
+					roomId: 'H-7',
+					description: 'a small room'
+				}
+			}
+		},
+		'H-7': {
+			roomId: 'H-7',
+			description: "You are in a small room that is lit by a flickering candle. Great, an unattended flame, in an abandoned house. GREAT IDEA WHOEVER LIVED HERE.",
+			exits: {
+				'west': {
+					roomId: 'H-6',
+					description: 'a hallway'
+				},
+				'down': {
+					roomId: 'H-8',
+					description: 'the floor below'
+				}
+			}
+		},
+		'1-2-2': {
+			roomId: '1-2-2',
+			description: "You are in a medium sized closet. There are many fancy clothes here. You resist the urge to try any of them on.",
+			exits: {
+				'south': {
+					roomId: '1-2-3',
+					description: 'a room'
+				},
+				'east': {
+					roomId: 'A-7',
+					description: 'a room'
+				}
+			}
+		},
+		'A-7': {
+			roomId: 'A-7',
+			description: "You are in a medium sized room. There are no windows here, but it seems lit by a glowing orb that's fused to the wall. You resist the urge to touch it. That seems like a good idea. Touching weird glowy things never leads to good endings.",
+			exits: {
+				'west': {
+					roomId: '1-2-2',
+					description: 'a closet'
+				},
+				'east': {
+					roomId: 'A-6',
+					description: 'a flight of stairs'
+				},
+				'south': {
+					roomId: 'A-8',
+					description: 'a hallway'
+				}
+			}
+		},
+		'A-6': {
+			roomId: 'A-6',
+			description: "You are at the bottom of a set of stairs. The steps all have some weird non-slip coating on them. It smells weird. There's a flickering lamp near the stairs.",
+			exits: {
+				'west': {
+					roomId: 'A-7',
+					description: 'a room'
+				},
+				'up': {
+					roomId: 'A-5',
+					description: 'the upper floor'
+				}
+			}
+		},
+		'1-6-2': {
+			roomId: '1-6-2',
+			description: "You are in a large walk-in closet. It smells like mothballs. There's nothing else of note here.",
+			exits: {
+				'north': {
+					roomId: '1-6-1',
+					description: 'a hallway'
+				},
+				'south': {
+					roomId: '1-6-3',
+					description: 'a room'
+				}
+			}
+		},
+		'U-4': {
+			roomId: 'U-4',
+			description: "You are in a small, dimly lit room. There is a desk in the corner. If you squint enough, you can make out some writing on it. 'The Beast of the East was here'. Who's this Beast fella anyway?",
+			exits: {
+				'north': {
+					roomId: 'U-3',
+					description: 'a flight of stairs'
+				},
+				'up': {
+					roomId: 'U-5',
+					description: 'a room',
+					elevationType: 'ladder'
+				}
+			}
+		},
+
+		// Floor 1, row 3
 		
 	}
 }
