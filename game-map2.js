@@ -879,7 +879,978 @@ var GAMEMAP = {
 		},
 
 		// Floor 1, row 3
-		
+		'H-5': {
+			roomId: 'H-5',
+			description: "You are at the bottom of a ladder, in a rather dark and dank room. You detect the faint smell of... is that pancakes?",
+			exits: {
+				'north': {
+					roomId: 'H-6',
+					description: 'a hallway'
+				},
+				'up': {
+					roomId: 'H-4',
+					description: 'the upper floor'
+				}
+			}
+		},
+		'1-2-3': {
+			roomId: '1-2-3',
+			description: "You are in a partially constructed room. Some of the walls have been intentionally left blank, uh, unconstructed. In the distance, you can see other parts of the house. You start to get annoyed with the person who sent you here.",
+			exits: {
+				'north': {
+					roomId: '1-2-2',
+					description: 'the closet which you literally just came from'
+				}
+			}
+		},
+		'A-8': {
+			roomId: 'A-8',
+			description: "You are in a short hallway. There are paintings of... saucepans? OK, whoever lived here has some serious issues.",
+			exits: {
+				'north': {
+					roomId: 'A-7',
+					description: 'a room'
+				},
+				'east': {
+					roomId: 'A-9',
+					description: 'a ladder'
+				}
+			}
+		},
+		'A-9': {
+			roomId: 'A-9',
+			description: " You are at the top of a rather sketchy looking ladder. The rungs seem intact though.",
+			exits: {
+				'west': {
+					roomId: 'A-8',
+					description: 'a hallway'
+				},
+				'south': {
+					roomId: '1-4-4',
+					description: 'a room'
+				},
+				'east': {
+					roomId: '1-5-3',
+					description: 'a narrow hallway'
+				},
+				'down': {
+					roomId: 'A-10',
+					description: 'the ground floor',
+					elevationType: 'ladder'
+				}
+			}
+		},
+		'1-5-3': {
+			roomId: '1-5-3',
+			description: "You are in a narrow hallway. There are paintings of unicorns and rainbows on the walls. And a small, special snowflake.",
+			exits: {
+				'west': {
+					roomId: 'A-9',
+					description: 'a ladder'
+				},
+				'east': {
+					roomId: '1-6-3',
+					description: 'a study room'
+				}
+			}
+		},
+		'1-6-3': {
+			roomId: '1-6-3',
+			description: "You are in a large study room. There is a drawing table in the middle of the room, and rows of shelves line the wall. There is also a giant painting of a man with long hair riding a ridiculously tiny horse.",
+			exits: {
+				'west': {
+					roomId: '1-5-3',
+					description: 'a hallway'
+				},
+				'north': {
+					roomId: '1-6-2',
+					description: 'a closet'
+				}
+			}
+		},
+		'1-7-3': {
+			roomId: '1-7-3',
+			description: "You are at the bottom of a flight of stairs. There is an electric lamp flickering in the corner. How is there still electricity here?",
+			exits: {
+				'south': {
+					roomId: '1-7-4',
+					description: 'a room'
+				},
+				'up': {
+					roomId: '2-7-3',
+					description: 'the upper floor'
+				}
+			}
+		},
+
+		// Floor 1 row 4
+		'T-7': {
+			roomId: 'T-7',
+			description: "You are in a bedroom. There is a large window here. Oh wait, that's painted on too. As is that desk. And that dresser. ",
+			exits: {
+				'south': {
+					roomId: 'T-8',
+					description: 'a walk-in closet'
+				},
+				'east': {
+					roomId: 'T-6',
+					description: 'a hallway'
+				}
+			}
+		},
+		'T-6': {
+			roomId: 'T-6',
+			description: "You are in a small hallway. Someone apparently thought that it would be a good idea to paint pictures of doors on the walls.",
+			exits: {
+				'west': {
+					roomId: 'T-7',
+					description: 'a bedroom'
+				},
+				'south': {
+					roomId: 'T-5',
+					description: 'a flight of stairs'
+				}
+			}
+		},
+		'1-4-4': {
+			roomId: '1-4-4',
+			description: "You is in a room that were small. In the corner were a desk with a books entitled 'Grammmmer 4 dummies'.",
+			exits: {
+				'north': {
+					roomId: 'A-9',
+					description: 'a ladder'
+				},
+				'east': {
+					roomId: '1-5-4',
+					description: 'a hallway'
+				}
+			}
+		},
+		'1-5-4': {
+			roomId: '1-5-4',
+			description: "You are in a wide hallway with an unfinished ceiling. There are ladders and scaffolding all over the place.",
+			exits: {
+				'west': {
+					roomId: '1-4-4',
+					description: 'a room'
+				},
+				'east': {
+					roomId: '1-6-4',
+					description: 'a bedroom'
+				},
+				'up': {
+					roomId: '2-5-4',
+					description: 'the upper floor',
+					elevationType: 'ladder',
+				}
+			}
+		},
+		'1-6-4': {
+			roomId: '1-6-4',
+			description: " You are in a small bedroom. The walls are painted lilac. You know this because there is a candle in the middle of the room. Just sitting there, unattended.",
+			exits: {
+				'west': {
+					roomId: '1-5-4',
+					description: 'a hallway'
+				},
+				'south': {
+					roomId: '1-6-5',
+					description: 'a bathroom'
+				}
+			}
+		},
+		'1-7-4': {
+			roomId: '1-7-4',
+			description: "You are in a room with wall to wall windows. It looks east over a lush meadow, with a castle in the background, and a rainbow. Oh wait, it's just a painting.",
+			exits: {
+				'north': {
+					roomId: '1-7-3',
+					description: 'a flight of stairs'
+				}
+			}
+		},
+
+		// Floor 1 row 5
+		'T-8': {
+			roomId: 'T-8',
+			description: " You are in a very large walk-in closet. It smells of moth balls. There are some rather fancy looking clothes here.",
+			exits: {
+				'north': {
+					roomId: 'T-7',
+					description: 'a bedroom'
+				},
+				'south': {
+					roomId: 'T-9',
+					description: 'a flight of stairs'
+				}
+			}
+		},
+		'T-5': {
+			roomId: 'T-5',
+			description: "You are at the bottom of a flight of stairs. There is... nothing else much here. Move along.",
+			exits: {
+				'north': {
+					roomId: 'T-6',
+					description: 'a hallway'
+				},
+				'up': {
+					roomId: 'T-4',
+					description: 'the floor above'
+				}
+			}
+		},
+		'T-2': {
+			roomId: 'T-2',
+			description: "You are on a narrow landing. There are ladders leading up and down. You start to get a little claustrophobic.",
+			exits: {
+				'down': {
+					roomId: 'T-1',
+					description: 'the ground floor'
+				},
+				'up': {
+					roomId: 'T-3',
+					description: 'the floor above'
+				}
+			}
+		},
+		'1-3-5': {
+			roomId: '1-3-5',
+			description: "You are at the top of a flight of stairs. There's some nice marbling on it.",
+			exits: {
+				'south': {
+					roomId: 'Y-2',
+					description: 'a ladder'
+				},
+				'down': {
+					roomId: '0-3-5',
+					description: 'the ground floor'
+				}
+			}
+		},
+		'Y-5': {
+			roomId: 'Y-5',
+			description: " You are in a large bedroom. There is a four-post bed in the center, with the remains of a large cabinet in the corner. There are some painted on windows on the walls.",
+			exits: {
+				'south': {
+					roomId: 'Y-4',
+					description: 'a bathroom'
+				},
+				'up': {
+					roomId: 'Y-6',
+					description: 'a higher floor'
+				}
+			}
+		},
+		'1-6-5': {
+			roomId: '1-6-5',
+			description: "You are in a small bathroom. Just a generic looking bathroom. With a generic looking sink, and a generic looking tub, and a shiny golden toothbrush, nailed to the wall.",
+			exits: {
+				'north': {
+					roomId: '1-6-4',
+					description: 'a room'
+				}
+			}
+		},
+
+		// Floor 1 row 6
+		'T-9': {
+			roomId: 'T-9',
+			description: "You are at the bottom of a narrow flight of stairs. There is a cabinet with a green lock.",
+			interactables: {
+				'green-cabinet': {
+					name: 'A CABINET with a green lock',
+					description: 'A majestic wooden CABINET with a tiny green lock securing it',
+					keywords: ['cabinet'],
+					interactions: {
+						'open': {
+							requires: ['green-key'],
+							yields: {
+								displayText: 'You open the cabinet and find an EMERALD SHOT GLASS.',
+								item: {
+									id: 'emerald-shot-glass',
+									name: 'an EMERALD SHOT GLASS',
+									description: 'A double tall SHOT GLASS made of emerald. Seems expensive',
+									keywords: ['shot glass', 'emerald shot glass']
+								}
+							}
+						}
+					}
+				}
+			},
+			exits: {
+				'north': {
+					roomId: 'T-8',
+					description: 'a walk-in closet'
+				},
+				'south': {
+					roomId: '1-0-7',
+					description: 'a hallway'
+				},
+				'up': {
+					roomId: '2-0-6',
+					description: 'the floor above'
+				}
+			}
+		},
+		'1-2-6': {
+			roomId: '1-2-6',
+			description: "You are in an incomplete room. There is a gaping hole in the floor. It's as if the builder was too lazy to fi...",
+			exits: {
+				'east': {
+					roomId: 'Y-2',
+					description: 'a ladder'
+				}
+			}
+		},
+		'Y-2': {
+			roomId: 'Y-2',
+			description: "You are at the bottom of a rickety ladder.",
+			exits: {
+				'north': {
+					roomId: '1-3-5',
+					description: 'a flight of stairs'
+				},
+				'west': {
+					roomId: '1-2-6',
+					description: 'a room'
+				},
+				'east': {
+					roomId: 'Y-3',
+					description: 'a hallway'
+				},
+				'up': {
+					roomId: 'Y-1',
+					description: 'the floor above'
+				}
+			}
+		},
+		'Y-3': {
+			roomId: 'Y-3',
+			description: "You are in a narrow hallway, lit by candles. Actually wait, those are tealights. Which are a kind of candle. Whatever.",
+			exits: {
+				'west': {
+					roomId: 'Y-2',
+					description: 'a ladder'
+				},
+				'east': {
+					roomId: 'Y-4',
+					description: 'a bathroom'
+				}
+			}
+		},
+		'Y-4': {
+			roomId: 'Y-4',
+			description: "You are in a rather large bathroom. We're talking larger-than-your-apartment large. It's positively huge. Oh, and there's a sink in the corner, as well as a tub, and other bathroom related paraphanilia.",
+			exits: {
+				'west': {
+					roomId: 'Y-3',
+					description: 'a hallway'
+				},
+				'north': {
+					roomId: 'Y-5',
+					description: 'a bedroom'
+				}
+			}
+		},
+
+		// Floor 1 row 7
+		'1-0-7': {
+			roomId: '1-0-7',
+			description: "You are in a short hallway. There are decorative candle sticks all over the place.",
+			exits: {
+				'north': {
+					roomId: 'T-9',
+					description: 'a flight of stairs'
+				},
+				'south': {
+					roomId: '1-0-8',
+					description: 'a flight of stairs'
+				}
+			}
+		},
+		'Y-10': {
+			roomId: 'Y-10',
+			description: "You are at the top of a flight of stairs. There seems to be a strange glow emanating from the far wall. It looks green, no, blue, no, red, no, green...",
+			exits: {
+				'east': {
+					roomId: 'Y-9',
+					description: 'a ladder'
+				},
+				'down': {
+					roomId: 'Y-11',
+					description: 'the ground floor'
+				}
+			}
+		},
+		'Y-9': {
+			roomId: 'Y-9',
+			description: "You are at the bottom of a ladder, in a narrow crawl space. You start to get a little claustrophobic.",
+			exits: {
+				'west': {
+					roomId: 'Y-10',
+					description: 'a flight of stairs'
+				},
+				'up': {
+					roomId: 'Y-8',
+					description: 'a small room',
+					elevationType: 'ladder'
+				}
+			}
+		},
+
+		// Floor 1 row 8
+		'1-0-8': {
+			roomId: '1-0-8',
+			description: "You are at the top of a flight of stairs. There are several lanterns hanging from the wall. They look like they are gas powered. But gas from... where?",
+			exits: {
+				'north': {
+					roomId: '1-0-7',
+					description: 'a hallway'
+				},
+				'down': {
+					roomId: '0-0-8',
+					description: 'the ground floor'
+				}
+			}
+		},
+
+		// Floor 2 row 0
+		'H-1': {
+			roomId: 'H-1',
+			description: "You are in a trophy room of sorts. There's a very flashy trophy that says 'Top of the Tops'. You can't quite make out what sport it was for.",
+			items: {
+				'bowling-ball': {
+					id: 'bowling-ball',
+					keywords: ['bowling ball'],
+					name: 'a BOWLING BALL',
+					description: 'A heavy BOWLING BALL, the brand says "Top Spin"'
+				}
+			},
+			exits: {
+				'south': {
+					roomId: 'H-2',
+					description: 'a hallway'
+				}
+			}
+		},
+
+		// Floor 2 row 1
+		'H-2': {
+			roomId: 'H-2',
+			description: "You are in a long hallway. It is surprisingly brightly lit. Which is odd, because all you see is walls for days.",
+			exits: {
+				'north': {
+					roomId: 'H-1',
+					description: 'a room'
+				},
+				'south': {
+					roomId: 'H-3',
+					description: 'more of the same hallway'
+				}
+			}
+		},
+		'A-3': {
+			roomId: 'A-3',
+			description: "You are at the top of a ladder. You make the mistake of looking down. Never make that mistake again.",
+			exits: {
+				'east': {
+					roomId: 'A-4',
+					description: 'a room'
+				},
+				'south': {
+					roomId: '2-3-2',
+					description: 'a room'
+				},
+				'down': {
+					roomId: 'A-2',
+					description: 'a landing',
+					elevationType: 'ladder'
+				}
+			}
+		},
+		'A-4': {
+			roomId: 'A-4',
+			description: "You are in a room with a large window. It looks out over an overgrown garden. Oh wait, that's no garden. It's a graveyard!",
+			exits: {
+				'west': {
+					roomId: 'A-3',
+					description: 'a ladder'
+				},
+				'south': {
+					roomId: 'A-5',
+					description: 'a flight of stairs'
+				}
+			}
+		},
+		'2-5-1': {
+			roomId: '2-5-1',
+			description: " You are in a room that looks like a library. There are a few shelves lined with books. There is a desk in the center of the room with a book entitled 'The design and building of spooky houses - Complete with examples!'.",
+			exits: {
+				'east': {
+					roomId: 'U-1',
+					description: 'a room'
+				},
+				'south': {
+					roomId: '2-5-2',
+					description: 'a storage closet'
+				}
+			}
+		},
+		'U-1': {
+			roomId: 'U-1',
+			description: "You are in a room full of cages. You start thinking about the elephant in the room, no doubt because there is a skeleton of an elephant in the room.",
+			items: {
+				'blue-key': {
+					id: 'blue-key',
+					name: 'a BLUE KEY',
+					description: 'A BLUE KEY, with a sticker on it marked "Sunrise Ridge"',
+					keywords: ['blue key']
+				}
+			},
+			exits: {
+				'west': {
+					roomId: '2-5-1',
+					description: 'a library'
+				},
+				'east': {
+					roomId: 'U-2',
+					description: 'a flight of stairs'
+				}
+			}
+		},
+		'U-2': {
+			roomId: 'U-2',
+			description: " You are at the top of a flight of stairs. These seem to be covered in some sort of sponge. They feel squishy.",
+			exits: {
+				'west': {
+					roomId: 'U-1',
+					description: 'a room'
+				},
+				'down': {
+					roomId: 'U-3',
+					description: 'the floor below'
+				}
+			}
+		},
+
+		// Floor 2 row 2
+		'H-3': {
+			roomId: 'H-3',
+			description: "You are in a hallway. You resist the urge to just sit and meditate yourself away from this place.",
+			exits: {
+				'north': {
+					roomId: 'H-2',
+					description: 'more of the same hallway'
+				},
+				'south': {
+					roomId: 'H-4',
+					description: 'one end of the hallway'
+				},
+				'east': {
+					roomId: '2-1-2',
+					description: 'a room'
+				}
+			}
+		},
+		'2-1-2': {
+			roomId: '2-1-2',
+			description: "You are in a modestly sized room. It is full of dust. In fact, there is a mountain of dust in the center. You hold your breath as you skirt around it.",
+			exits: {
+				'west': {
+					roomId: 'H-3',
+					description: 'a hallway'
+				},
+				'south': {
+					roomId: '2-1-3',
+					description: 'a hallway'
+				},
+				'east': {
+					roomId: '2-2-2',
+					description: 'a hallway'
+				}
+			}
+		},
+		'2-2-2': {
+			roomId: '2-2-2',
+			description: "You are in a narrow hallway. There are grooves cut into the wall. That's a little weird.",
+			exits: {
+				'west': {
+					roomId: '2-1-2',
+					description: 'a room'
+				},
+				'east': {
+					roomId: '2-3-2',
+					description: 'a room'
+				}
+			}
+		},
+		'2-3-2': {
+			roomId: '2-3-2',
+			description: " You are in a small room. There is a tiny desk in the corner, with a book entitled 'Tiny rooms and how to stoop to a whole new level'.",
+			exits: {
+				'west': {
+					roomId: '2-2-2',
+					description: 'a hallway'
+				},
+				'north': {
+					roomId: 'A-3',
+					description: 'a ladder'
+				}
+			}
+		},
+		'A-5': {
+			roomId: 'A-5',
+			description: "You are at the top of a flight of stairs. The stairs seem to be coated in some sort of non-slip material. There is a picture on the wall of a stack of pancakes.",
+			exits: {
+				'north': {
+					roomId: 'A-4',
+					description: 'a room'
+				},
+				'down': {
+					roomId: 'A-6',
+					description: 'the floor below'
+				}
+			}
+		},
+		'2-5-2': {
+			roomId: '2-5-2',
+			description: "You are in a small storage closet. There's a mop in the corner. The floor is wet.",
+			exits: {
+				'north': {
+					roomId: '2-5-1',
+					description: 'a library of sorts'
+				},
+				'south': {
+					roomId: '2-5-3',
+					description: 'a hallway'
+				}
+			}
+		},
+		'U-5': {
+			roomId: 'U-5',
+			description: "You are in a medium sized bedroom. There is a chest with a blue lock on it. There is also a painting of a Sunrise over a cliff.",
+			interactables: {
+				'blue-chest': {
+					hidden: true,
+					name: 'a CHEST with a blue lock on it',
+					description: 'A rather beat-up looking chest with a large blue lock in the front',
+					keywords: ['chest'],
+					interactions: {
+						'open': {
+							requires: ['blue-key'],
+							yields: {
+								displayText: 'You open the chest and find an AQUAMARINE RING in it',
+								item: {
+									id: 'aquamarine-ring',
+									name: 'An AQUAMARINE RING',
+									description: 'A rather pretty AQUAMARINE RING. Looks to be about a size 5.5',
+									keywords: ['ring', 'aquamarine ring']
+								}
+							}
+						}
+					}
+				}
+			},
+			exits: {
+				'south': {
+					roomId: '2-7-3',
+					description: 'a flight of stairs'
+				},
+				'down': {
+					roomId: 'U-4',
+					description: 'a dark room',
+					elevationType: 'ladder'
+				}
+			}
+		},
+
+		// Floor 2 row 3
+		'H-4': {
+			roomId: 'H-4',
+			description: "You are at one end of a long hallway. It is brightly lit, despite being (presumably) made of stone. Very strange.",
+			exits: {
+				'north': {
+					roomId: 'H-3',
+					description: 'more of the same hallway'
+				},
+				'down': {
+					roomId: 'H-5',
+					description: 'the floor below',
+					elevationType: 'ladder'
+				}
+			}
+		},
+		'2-1-3': {
+			roomId: '2-1-3',
+			description: "You are in a hallway. There are several painting on the wall, all of them depicting courageous acts of gastronomic fortitude.",
+			exits: {
+				'north': {
+					roomId: '2-1-2',
+					description: 'a room'
+				},
+				'south': {
+					roomId: '2-1-4',
+					description: 'a hallway'
+				}
+			}
+		},
+		'2-5-3': {
+			roomId: '2-5-3',
+			description: " You are in a hallway. One side of it looks over the floor below. It doesn't really look that spectacular.",
+			exits: {
+				'north': {
+					roomId: '2-5-2',
+					description: 'a storage closet'
+				},
+				'south': {
+					roomId: '2-5-4',
+					description: 'a crawlspace'
+				}
+			}
+		},
+		'2-6-3': {
+			roomId: '2-6-3',
+			description: "You are in a small room. There is a desk in the corner with a partially written manuscript. The title reads 'Of dead ends, and how not to go further'.",
+			exits: {
+				'east': {
+					roomId: '2-7-3',
+					description: 'a flight of stairs'
+				}
+			}
+		},
+		'2-7-3': {
+			roomId: '2-7-3',
+			description: " You are at the top of a flight of stairs. There is a painting of a horse drawn carriage hanging on the wall.",
+			exits: {
+				'north': {
+					roomId: 'U-5',
+					description: 'a room'
+				},
+				'down': {
+					roomId: '1-7-3',
+					description: 'the floor below'
+				}
+			}
+		},
+
+		// Floor 2 row 4
+		'2-1-4': {
+			roomId: '2-1-4',
+			description: " You are in a wide hallway. There are several statues of people lining the walls. The statues seem a little unbalanced. You should probably move along before one topples on you.",
+			exits: {
+				'north': {
+					roomId: '2-1-3',
+					description: 'a hallway'
+				},
+				'south': {
+					roomId: 'T-4',
+					description: 'a small room'
+				}
+			}
+		},
+		'2-2-4': {
+			roomId: '2-2-4',
+			description: "You are in a small room. There are cracks in the wall. It looks like someone wrote something on one of the walls: 'Hmm I wonder where this goes'",
+			exits: {
+				'south': {
+					roomId: 'T-3',
+					description: 'a ladder'
+				}
+			}
+		},
+		'2-5-4': {
+			roomId: '2-5-4',
+			description: "You are in a narrow crawlspace. You feel as if the walls are closing in on you. It might be a good idea to move along.",
+			exits: {
+				'north': {
+					roomId: '2-5-3',
+					description: 'a hallway'
+				},
+				'down': {
+					roomId: '1-5-4',
+					description: 'a hallway on the floor below',
+					elevationType: 'ladder'
+				}
+			}
+		},
+
+		// Floor 2 row 5
+		'T-4': {
+			roomId: 'T-4',
+			description: "You are in a small room. There is a dresser in the corner, as well as a very well preserved cupcake. It's probably not edible. Stop thinking about it.",
+			exits: {
+				'north': {
+					roomId: '2-1-4',
+					description: 'a hallway'
+				},
+				'east': {
+					roomId: 'T-3',
+					description: 'a ladder'
+				},
+				'down': {
+					roomId: 'T-5',
+					description: 'the floor below'
+				}
+			}
+		},
+		'T-3': {
+			roomId: 'T-3',
+			description: "You are at the top of a ladder. There's a small stool in the corner. You decide against sitting on it. Probably a good idea.",
+			exits: {
+				'west': {
+					roomId: 'T-4',
+					description: 'a small room'
+				},
+				'north': {
+					roomId: '2-2-4',
+					description: 'a room'
+				},
+				'down': {
+					roomId: 'T-2',
+					description: 'the floor below',
+					elevationType: 'ladder'
+				}
+			}
+		},
+		'Y-6': {
+			roomId: 'Y-6',
+			description: "You are at the top of a flight of stairs. There is a fancy looking lamp on a table in the corner. It looks... human like.",
+			exits: {
+				'south': {
+					roomId: 'Y-7',
+					description: 'a hallway'
+				},
+				'down': {
+					roomId: 'Y-5',
+					description: 'one floor down'
+				}
+			}
+		},
+
+		// Floor 2 row 6
+		'2-0-6': {
+			roomId: '2-0-6',
+			description: "You are at the top of a flight of stairs. There are a number of paintings of cats here. You should probably move along right meow.",
+			exits: {
+				'east': {
+					roomId: '2-1-6',
+					description: 'a hallway'
+				},
+				'down': {
+					roomId: 'T-9',
+					description: 'the floor below'
+				}
+			}
+		},
+		'2-1-6': {
+			roomId: '2-1-6',
+			description: "You are in a narrow hallway. There is a single, flickering candle in the distance. Or maybe there isn't. You can't really tell.",
+			exits: {
+				'west': {
+					roomId: '2-0-6',
+					description: 'a flight of stairs'
+				},
+				'south': {
+					roomId: '2-1-7',
+					description: 'a small room'
+				}
+			}
+		},
+		'Y-1': {
+			roomId: 'Y-1',
+			description: "You are in a pantry-like room. There are empty jars everywhere. There's also a rickety old ladder.",
+			items: {
+				'honey-jar': {
+					id: 'honey-jar',
+					keywords: ['jar', 'honey jar', 'hunny jar'],
+					name: 'a JAR of Northern Pride Hunny',
+					description: 'A rather large JAR of golden yellow hunny'
+				}
+			},
+			exits: {
+				'south': {
+					roomId: '2-3-7',
+					description: 'a hallway'
+				},
+				'down': {
+					roomId: 'Y-2',
+					description: 'the floor below'
+				}
+			}
+		},
+		'Y-7': {
+			roomId: 'Y-7',
+			description: "You are in a short hallway. There are a couple of paintings on the wall of old people. One of them is holding a cupcake.",
+			exits: {
+				'north': {
+					roomId: 'Y-6',
+					description: 'a flight of stairs'
+				},
+				'south': {
+					roomId: 'Y-8',
+					description: 'a storage room'
+				}
+			}
+		},
+
+		// Floor 2 row 7
+		'2-1-7': {
+			roomId: '2-1-7',
+			description: "You are in a small room. The occupants seem to have left in a hurry, for there is a massive pile of stuff in the middle of the room. Probably not wise to loot the pile.",
+			exits: {
+				'north': {
+					roomId: '2-1-6',
+					description: 'a hallway'
+				},
+				'east': {
+					roomId: '2-2-7',
+					description: 'a closet'
+				}
+			}
+		},
+		'2-2-7': {
+			roomId: '2-2-7',
+			description: "You are in a closet of some kind. There are racks for hanging things, but all you see are candy wrappers.",
+			exits: {
+				'west': {
+					roomId: '2-1-7',
+					description: 'a room'
+				},
+				'east': {
+					roomId: '2-3-7',
+					description: 'a hallway'
+				}
+			}
+		},
+		'2-3-7': {
+			roomId: '2-3-7',
+			description: "You are in a hallway. There are several stains on the wall. Some of them look like they are still wet. You resist the urge to reach out and touch them.",
+			exits: {
+				'west': {
+					roomId: '2-2-7',
+					description: 'a closet'
+				},
+				'north': {
+					roomId: 'Y-1',
+					description: 'a pantry'
+				}
+			}
+		},
+		'Y-8': {
+			roomId: 'Y-8',
+			description: "You are in a small storage room. It is very dusty. The walls are lined with empty shelves. There's also a ladder in the corner.",
+			exits: {
+				'north': {
+					roomId: 'Y-7',
+					description: 'a hallway;'
+				},
+				'down': {
+					roomId: 'Y-9',
+					description: 'the floor below',
+					elevationType: 'ladder'
+				}
+			}
+		}
 	}
 }
 /*
