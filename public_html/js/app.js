@@ -1,5 +1,7 @@
 window.addEventListener('load', function () {
 
+var clientId;
+var state;
 var socket = io();
 
 var commandline = document.getElementById('commandline');
@@ -44,6 +46,28 @@ function addToConsole(message, type) {
 
 socket.on('message', function (msg) {
 	addToConsole(msg);
+});
+
+socket.on('state', function (istate) {
+	console.log('got state: ', istate);
+	state = istate;
+});
+
+socket.on('registration', function (id) {
+	if (clientId) {
+		// We already have a client id, tell the server that we are a recap
+		socket.emit('clientReady', {
+			id: clientId,
+			recap: true,
+			state: state
+		});
+	}
+	else {
+		clientId = id;
+		socket.emit('clientReady', {
+			id: clientId
+		});
+	}
 });
 
 });

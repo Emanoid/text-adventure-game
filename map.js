@@ -1,3 +1,4 @@
+var zlib = require('zlib');
 var LEGAL_DIRECTIONS = ['north', 'east', 'south', 'west', 'up', 'down'];
 
 class Map {
@@ -6,6 +7,52 @@ class Map {
 		this.d_currentRoom = this.d_map[mapData.startingRoom];
 
 		// Any other game state here
+	}
+
+	encodeMapState() {
+		var roomsOfInterest = {};
+		for (var roomId in this.d_map) {
+			var currRoom = this.d_map[roomId];
+			if (currRoom.items) {
+				if (!roomsOfInterest[roomId]) {
+					roomsOfInterest[roomId] = {};
+				}
+
+				roomsOfInterest[roomId].items = currRoom.items;
+			}
+
+			if (currRoom.interactables) {
+				if (!roomsOfInterest[roomId]) {
+					roomsOfInterest[roomId] = {};
+				}
+
+				roomsOfInterest[roomId].interactables = currRoom.interactables;
+			}
+		}
+		return zlib.deflateSync(JSON.stringify(roomsOfInterest)).toString('base64');
+	}
+
+	// Update items
+	decodeMapState(stateStr, currentRoomId) {
+		var jsonStr = zlib.inflateSync(Buffer.from(stateStr, 'base64'));
+		try {
+			var roomsObj = JSON.parse(jsonStr);
+			for (var roomId in roomsObj) {
+				var incomingRoom = roomsObj[roomId];
+				if (this.d_map[roomId]) {
+					if (incomingRoom.items) {
+						this.d_map[roomId].items = incomingRoom.items;
+					}
+					if (incomingRoom.interactables) {
+						this.d_map[roomId].interactables = incomingRoom.interactables;
+					}
+				}
+			}
+			this.d_currentRoom = this.d_map[currentRoomId];
+		}
+		catch(err) {
+			console.warn("Could not decode map state: ", err);
+		}
 	}
 
 	// Responds to 'move <direction>' or '<direction>'

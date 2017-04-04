@@ -505,12 +505,14 @@ var GAMEMAP = {
 						'put': {
 							requires: ['bowling-ball'],
 							requiredInput: { itemId: 'bowling-ball' },
-							yields: 'The ball rolls down the track, hitting a bunch of random contraptions. After approximately 5 millenia, a dumbwaiter appears, with a MEDAL carved out of GARNET',
-							item: {
-								id: 'garnet-medal',
-								name: 'A GARNET MEDAL',
-								description: 'An ornate MEDAL, carved out of GARNET',
-								keywords: ['medal', 'garnet medal']
+							yields: {
+								displayText: 'The ball rolls down the track, hitting a bunch of random contraptions. After approximately 5 millenia, a dumbwaiter appears, with a MEDAL carved out of GARNET',
+								item: {
+									id: 'garnet-medal',
+									name: 'A GARNET MEDAL',
+									description: 'An ornate MEDAL, carved out of GARNET',
+									keywords: ['medal', 'garnet medal']
+								}
 							}
 						}
 					}

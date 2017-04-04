@@ -1,5 +1,6 @@
 var gameMap = require('./game-map2');
 var HouseMap = require('./map');
+var zlib = require('zlib');
 
 var BASIC_MOVES = [
 	'move [north/east/south/west/up/down] - Move yo\'self',
@@ -39,8 +40,47 @@ class Player {
 
 		this.d_gameStarted = false;
 
-		this.sendMessage("<p>Welcome to the Text-o-Matic Game Engine</p>" +
+		// Send registration information
+		this.d_socket.emit('registration', this.d_id);
+
+		// Send messages only after registration
+		this.d_socket.on('clientReady', function(regData) {
+			if (regData.recap) {
+				console.log('is a recap');
+				this.d_id = regData.id;
+				
+				// TODO reload state
+			}
+			else {
+				this.sendMessage("<p>Welcome to the Text-o-Matic Game Engine</p>" +
 						 "<p>Type 'load [game-name]' to start playing!</p>");
+			}
+		}.bind(this));
+		
+	}
+
+	encodeState() {
+		// save gameStarted state, inventory, current room id, and state of the rooms
+		// this.d_map.d_currentRoom.roomId
+	}
+
+	sendState() {
+		var currRoomId = Buffer.from(this.d_map.d_currentRoom.roomId).toString('base64');
+		var mapInfo = this.d_map.encodeMapState();
+		var inventoryInfo = zlib.deflateSync(JSON.stringify(this.d_inventory)).toString('base64');
+
+		var state = {
+			rid: currRoomId,
+			m: mapInfo,
+			i: inventoryInfo
+		};
+
+		var b64 = Buffer.from(JSON.stringify(state)).toString('base64');
+		this.d_socket.emit('state', b64);
+	}
+
+	decodeState(stateStr) {
+
 	}
 
 	printWelcomeMessage() {
@@ -117,6 +157,7 @@ class Player {
 					this.sendMessage("<h2>" + this.d_mapInfo.gameTitle + "</h2>")
 					this.d_gameStarted = true;
 					this.printWelcomeMessage();
+					this.sendState();
 				}
 				else {
 					this.sendMessage("<p>Can't load " + parsed.cartridge + "!</p>");
@@ -135,6 +176,9 @@ class Player {
 				var result = this.d_map.move(parsed.direction);
 				if (result) {
 					this.sendMessage(this.d_map.currentRoomDescription());
+
+					// TODO Send a state recap here
+					this.sendState();
 				}
 				else {
 					this.sendMessage("<p>You can't move there</p>");
@@ -163,6 +207,9 @@ class Player {
 				if (result.success) {
 					this.d_inventory[result.itemId] = result.item;
 					this.sendMessage("<p>You have taken " + result.item.name + "</p>");
+
+					// TODO Send a recap here
+					this.sendState();
 				}
 				else {
 					this.sendMessage("<p>You can't take that!</p>");
@@ -197,6 +244,9 @@ class Player {
 				// Let the map handle this
 				var customResult = this.d_map.customAction(parsed.action, parsed.params, this.d_inventory);
 				this.sendMessage(customResult.message);
+
+				// TODO Send a recap here
+				this.sendState();
 			} break;
 			// DEBUG
 			case 'debug-location': {
