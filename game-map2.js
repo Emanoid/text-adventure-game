@@ -1160,7 +1160,7 @@ var GAMEMAP = {
 			exits: {
 				'north': {
 					roomId: '1-6-4',
-					description: 'a room'
+					description: 'a bedroom'
 				}
 			}
 		},
