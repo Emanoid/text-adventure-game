@@ -256,7 +256,10 @@ class Map {
 
 						if (validation) {
 							// now check that we can actually do this
-							if (this.hasItem(inventory, params)) {
+							// We also need to check that we are giving the right thing
+							var validItem = this.hasItem(inventory, params);
+							// TODO - This could probably be a bit more robust
+							if (validItem && interaction.requiredInput.itemId === validItem.id) {
 								var reward = interaction.yields;
 								if (reward.item) {
 									// Add to current room items list

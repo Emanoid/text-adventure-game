@@ -3,7 +3,7 @@ var HouseMap = require('./map');
 
 var BASIC_MOVES = [
 	'move [north/east/south/west/up/down] - Move yo\'self',
-	'n/s/e/w/u/d - Shorthand for moving yo\'self',
+	'n/e/s/w/u/d - Shorthand for moving yo\'self',
 	'look - Check out your surroundings',
 	'look [item] - Investigate an object more closely',
 	'take [item] - Pillage the current room and relieve it of said item',
@@ -83,18 +83,18 @@ class Player {
 			helpMessage = "<p>This is getting real old, real quick. Here:</p>"
 		}
 
-		helpMessage += "<p>";
+		helpMessage += "<ul>";
 		for (var i = 0; i < BASIC_MOVES.length; i++) {
-			helpMessage += BASIC_MOVES[i] + "<br />"
+			helpMessage += "<li>" + BASIC_MOVES[i] + "</li>"
 		}
 
 		var customActions = this.d_map.currentRoomSpecialActions();
 		for (var i = 0; i < customActions.length; i++) {
 			if (CUSTOM_MOVE_DESCRIPTIONS[customActions[i]]) {
-				helpMessage += CUSTOM_MOVE_DESCRIPTIONS[customActions[i]] + "<br />";
+				helpMessage += "<li>" + CUSTOM_MOVE_DESCRIPTIONS[customActions[i]] + "</li>";
 			}
 		}
-		helpMessage += "</p>";
+		helpMessage += "</ul>";
 
 		this.sendMessage(helpMessage);
 	}
@@ -124,6 +124,7 @@ class Player {
 				return;
 			}
 			this.sendMessage("<p>INVALID COMMAND</p>");
+			return;
 		}
 		
 		switch (parsed.type) {

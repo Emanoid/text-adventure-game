@@ -1114,11 +1114,15 @@ var GAMEMAP = {
 			exits: {
 				'down': {
 					roomId: 'T-1',
-					description: 'the ground floor'
+					description: 'the ground floor',
+					elevationType: 'ladder',
+					tense: 'singular'
 				},
 				'up': {
 					roomId: 'T-3',
-					description: 'the floor above'
+					description: 'the floor above',
+					elevationType: 'ladder',
+					tense: 'singular'
 				}
 			}
 		},
@@ -1229,7 +1233,9 @@ var GAMEMAP = {
 				},
 				'up': {
 					roomId: 'Y-1',
-					description: 'the floor above'
+					description: 'the floor above',
+					elevationType: 'ladder',
+					tense: 'singular'
 				}
 			}
 		},
@@ -1789,7 +1795,9 @@ var GAMEMAP = {
 				},
 				'down': {
 					roomId: 'Y-2',
-					description: 'the floor below'
+					description: 'the floor below',
+					elevationType: 'ladder',
+					tense: 'singular'
 				}
 			}
 		},
