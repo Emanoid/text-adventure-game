@@ -46,10 +46,11 @@ class Player {
 		// Send messages only after registration
 		this.d_socket.on('clientReady', function(regData) {
 			if (regData.recap) {
-				console.log('is a recap');
+				console.log('Received a recap from ' + regData.id);
 				this.d_id = regData.id;
-				
-				// TODO reload state
+				if (regData.state) {
+					this.decodeState(regData.state);
+				}
 			}
 			else {
 				this.sendMessage("<p>Welcome to the Text-o-Matic Game Engine</p>" +
@@ -57,11 +58,6 @@ class Player {
 			}
 		}.bind(this));
 		
-	}
-
-	encodeState() {
-		// save gameStarted state, inventory, current room id, and state of the rooms
-		// this.d_map.d_currentRoom.roomId
 	}
 
 	sendState() {
@@ -80,7 +76,35 @@ class Player {
 	}
 
 	decodeState(stateStr) {
+		var rawStateJSON = Buffer.from(stateStr, 'base64').toString();
+		
+		try {
+			var rawState = JSON.parse(rawStateJSON);
+			var roomId = Buffer.from(rawState.rid, 'base64').toString();
+			var inventoryZlib = Buffer.from(rawState.i, 'base64');
+			var inventoryJSON = zlib.inflateSync(inventoryZlib).toString();
+			var inventory = JSON.parse(inventoryJSON);
 
+			this.d_inventory = inventory;
+			if (this.d_map.decodeMapState(rawState.m, roomId)) {
+				// good to go 
+				this.d_gameStarted = true;
+			}
+			else {
+				console.warn("Could not decode map state. Resetting everything");
+				this.d_inventory = {};
+				this.d_map = new HouseMap(JSON.parse(JSON.stringify(gameMap)));
+				this.d_gameStarted = true;
+				this.sendMessage("<p><i>Sorry, haunted houses usually have spooks, " +
+								 "and we just ran into one of them. Re-starting your adventure...</i></p>");
+				
+			}
+		}
+		catch (err) {
+			console.warn("Could not decode state: ", err);
+			this.sendMessage("<p>Welcome to the Text-o-Matic Game Engine</p>" +
+						 "<p>Type 'load [game-name]' to start playing!</p>");
+		}
 	}
 
 	printWelcomeMessage() {

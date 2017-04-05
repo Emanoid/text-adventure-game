@@ -49,9 +49,11 @@ class Map {
 				}
 			}
 			this.d_currentRoom = this.d_map[currentRoomId];
+			return true;
 		}
 		catch(err) {
 			console.warn("Could not decode map state: ", err);
+			return false;
 		}
 	}
 
