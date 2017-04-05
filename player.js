@@ -89,14 +89,17 @@ class Player {
 			if (this.d_map.decodeMapState(rawState.m, roomId)) {
 				// good to go 
 				this.d_gameStarted = true;
+
+				// TODO Remove this
+				this.sendMessage("<p><i>~~~ Message from the ether: The server was restarted, and your state has been restored. Carry on! (this will be removed in production) ~~~</i></p>");
 			}
 			else {
 				console.warn("Could not decode map state. Resetting everything");
 				this.d_inventory = {};
 				this.d_map = new HouseMap(JSON.parse(JSON.stringify(gameMap)));
 				this.d_gameStarted = true;
-				this.sendMessage("<p><i>Sorry, haunted houses usually have spooks, " +
-								 "and we just ran into one of them. Re-starting your adventure...</i></p>");
+				this.sendMessage("<p><i>~~~ Sorry, haunted houses usually have spooks, " +
+								 "and we just ran into one of them. Re-starting your adventure. ~~~</i></p>");
 				
 			}
 		}
