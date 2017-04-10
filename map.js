@@ -5,7 +5,7 @@ class Map {
 	constructor(mapData) {
 		this.d_map = mapData.map;
 		this.d_currentRoom = this.d_map[mapData.startingRoom];
-
+		this.d_triggers = mapData.triggers;
 		// Any other game state here
 	}
 
@@ -229,7 +229,7 @@ class Map {
 	}
 
 	// A list of custom actions for the current room
-	currentRoomSpecialActions() {
+	currentRoomSpecialActions(inventory) {
 		var ret = [];
 		if (this.d_currentRoom.interactables) {
 			for (var interactableId in this.d_currentRoom.interactables) {
@@ -237,13 +237,87 @@ class Map {
 				// TODO
 				if (interactable.interactions) {
 					for (var interactionType in interactable.interactions) {
-						ret.push(interactionType)
+						var interactionInfo = interactable.interactions[interactionType];
+						
+						if (!interactionInfo.onlyShow) {
+							ret.push(interactionType);
+						}
+						else {
+							if (interactionInfo.onlyShow === 'whenRequirementsMet') {
+								var verified = true;
+								for (var i = 0; i < interactionInfo.requires.length; i++) {
+									if (!inventory[interactionInfo.requires[i]]) {
+										verified = false;
+										break;
+									}
+								}
+								if (verified) {
+									ret.push(interactionType);
+								}
+							}
+						}
 					}
 				}
 			}
 		}
 
 		return ret;
+	}
+
+	resolveTriggers(inventory) {
+		var triggerResults = [];
+		var removals = [];
+		for (var triggerId in this.d_triggers) {
+			var trigger = this.d_triggers[triggerId];
+			var conditionsMet = true;
+
+			for (var i = 0; i < trigger.conditions.length; i++) {
+				var condition = trigger.conditions[i];
+				if (condition.hasItems) {
+					// loop through all items in inventory
+					var itemsRequired = condition.hasItems;
+					var verified = true;
+					for (var j = 0; j < itemsRequired.length; j++) {
+						if (!inventory[itemsRequired[j]]) {
+							verified = false;
+							break;
+						}
+					}
+
+					if (!verified) {
+						conditionsMet = false;
+						break;
+					}
+				}
+			}
+
+			if (conditionsMet) {
+				// show display text
+				var msg;
+				if (trigger.yields) {
+					if (trigger.yields.preformatted) {
+						msg = trigger.yields.displayText;
+					}
+					else {
+						msg = '<p>' + trigger.yields.displayText + '</p>';
+					}
+
+					triggerResults.push({
+						message: msg
+					});
+				}
+
+				if (trigger.howMany === 'once') {
+					removals.push(triggerId);
+				}
+			}
+		}
+
+		for (var i = 0; i < removals.length; i++) {
+			delete this.d_triggers[removals[i]];
+		}
+
+		return triggerResults;
 	}
 
 	//handle custom action

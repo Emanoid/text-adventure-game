@@ -15,6 +15,7 @@ var CUSTOM_MOVE_DESCRIPTIONS = {
 	'put': 'put [item] - Take a beloved object of yours and offer it as a sacrifice',
 	'open': 'open [item] - Attempt to gain access to item',
 	'use': 'use [item] - Make use of an item in the room or in your posession',
+	'text': 'text [message] - Uhm, I don\'t know, send a text message?'
 	//'text': 'text <message> - Uhm, I don\'t know, send a text message?'
 }
 
@@ -155,7 +156,7 @@ class Player {
 			helpMessage += "<li>" + BASIC_MOVES[i] + "</li>"
 		}
 
-		var customActions = this.d_map.currentRoomSpecialActions();
+		var customActions = this.d_map.currentRoomSpecialActions(this.d_inventory);
 		for (var i = 0; i < customActions.length; i++) {
 			if (CUSTOM_MOVE_DESCRIPTIONS[customActions[i]]) {
 				helpMessage += "<li>" + CUSTOM_MOVE_DESCRIPTIONS[customActions[i]] + "</li>";
@@ -204,7 +205,11 @@ class Player {
 				if (result) {
 					this.sendMessage(this.d_map.currentRoomDescription());
 
-					// TODO Send a state recap here
+					var tResults = this.d_map.resolveTriggers(this.d_inventory);
+					for (var i = 0; i < tResults.length; i++) {
+						this.sendMessage(tResults[i].message);
+					}
+
 					this.sendState();
 				}
 				else {
@@ -217,8 +222,6 @@ class Player {
 					this.sendMessage(this.d_map.currentRoomDescription());
 				}
 				else {
-					// TODO 
-					
 					var result = this.d_map.look(parsed.target, this.d_inventory);
 					if (result.success) {
 						this.sendMessage("<p>" + result.item.description + "</p>");
@@ -235,7 +238,11 @@ class Player {
 					this.d_inventory[result.itemId] = result.item;
 					this.sendMessage("<p>You have taken " + result.item.name + "</p>");
 
-					// TODO Send a recap here
+					var tResults = this.d_map.resolveTriggers(this.d_inventory);
+					for (var i = 0; i < tResults.length; i++) {
+						this.sendMessage(tResults[i].message);
+					}
+					
 					this.sendState();
 				}
 				else {
@@ -380,7 +387,7 @@ class Player {
 				}
 			}
 			default: {
-				if (this.d_map.currentRoomSpecialActions().indexOf(commandParts[0]) !== -1) {
+				if (this.d_map.currentRoomSpecialActions(this.d_inventory).indexOf(commandParts[0]) !== -1) {
 					return {
 						type: 'custom',
 						action: commandParts[0],

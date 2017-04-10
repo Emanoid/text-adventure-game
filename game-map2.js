@@ -13,7 +13,26 @@ var GAMEMAP = {
                "<p>*** Use the TEXT box at the bottom to navigate the world ***</p>",
     preformattedIntroText: true,
 	catridgeId: 'mystery-house', // Use this to load the actual map
-
+	triggers: {
+		'all-items-collected': {
+			triggerId: 'all-items-collected',
+			howMany: 'once', // or always
+			conditions: [
+				{
+					// could also be 'enterRoom', etc
+					hasItems: ['emerald-shot-glass', 'diamond-necklace', 'amethyst', 'garnet-medal', 'aquamarine-ring', 'pearl-clipboard'],
+				}
+			],
+			yields: {
+				displayText: "<p><i> ~~~~~ </i></p>" +
+								"<p><i>Hey! Hey you! I had a feeling you've collected quite a haul so far! I think that the items " +
+								"you have all contain hidden secrets. Try looking at them from various " +
+								"directions to see what you find! And then find a way to let me know! Rewards for both of us!</i></p>" +
+								"<p><i> ~~~~~ </i></p>",
+				preformatted: true
+			}
+		}
+	},
 	map: {
 		'outside': {
 			roomId: 'outside',
@@ -64,13 +83,13 @@ var GAMEMAP = {
 					keywords: ['phone', 'cellphone'],
 					interactions: {
 						'text': {
+							onlyShow: 'whenRequirementsMet',
 							requires: ['emerald-shot-glass', 'diamond-necklace', 'amethyst', 'garnet-medal', 'aquamarine-ring', 'pearl-clipboard'], 
-							requiredInput: 'hauntings', // The input required for this command
+							requiredInput: 'haunty', // The input required for this command
 							yields: {
 								displayText: '<p>The phone beeps happily. A message appears on the screen.</p>' + 
 											 '<p>"Oh, hello! I\'m glad you found me. I\'m stuck, and you\'re my only hope."</p>' +
-											 '<p>"Tell them my name is Elvira"</p>' +
-											 '<p>NOTE from ZQ: I might add a part II to this, it is as yet unclear</p>',
+											 '<p>"Tell them my name is ELVIRA"</p>',
 								preformatted: true
 							}
 						}
@@ -135,7 +154,7 @@ var GAMEMAP = {
 			description: "You are at the bottom of a flight of stairs. There is a statue of a bear here with its hands outstretched, as if it wants something. The bear is wearing a red shirt and no pants.",
 			interactables: {
 				'hunny-bear': {
-					name: 'A statue of a bear wearing a red shirt and no pants.',
+					name: 'a statue of a bear wearing a red shirt and no pants.',
 					description: 'The beat statue has its hands outstretched, as if it wants something put in them',
 					keywords: ['bear'],
 					interactions: {
@@ -494,7 +513,7 @@ var GAMEMAP = {
 		// Floor 0, row 3
 		'H-9': {
 			roomId: 'H-9',
-			description: "You are in a large room with a very large window. This must have been a workshop of some sort. There is a metal track running all over the room. It looks like a Rube Goldberg machine of sorts. There is a circular opening in a corner. There is also a narrow set of stairs.",
+			description: "You are in a large room with a very large window. This must have been a workshop of some sort. There is a metal track running all over the room. It looks like a Rube Goldberg machine of sorts. There is a bowling ball sized opening in a corner. There is also a narrow set of stairs.",
 			interactables: {
 				'rube-goldberg-machine': {
 					hidden: true,
@@ -509,7 +528,7 @@ var GAMEMAP = {
 								displayText: 'The ball rolls down the track, hitting a bunch of random contraptions. After approximately 5 millenia, a dumbwaiter appears, with a MEDAL carved out of GARNET',
 								item: {
 									id: 'garnet-medal',
-									name: 'A GARNET MEDAL',
+									name: 'a GARNET MEDAL',
 									description: 'An ornate MEDAL, carved out of GARNET',
 									keywords: ['medal', 'garnet medal']
 								}
@@ -548,7 +567,7 @@ var GAMEMAP = {
 			description: " You are in a dimly lit room. There is a set of drawers here. There is a rather large compass rose etched into them.",
 			interactables: {
 				'purple-drawer': {
-					name: 'A locked purple drawer',
+					name: 'a locked purple drawer',
 					description: 'A drawer that is painted purple, with a keyhole in front',
 					keywords: ['drawer'],
 					interactions: {
@@ -558,7 +577,7 @@ var GAMEMAP = {
 								displayText: 'The drawer opens and you find a bag of AMETHYST',
 								item: {
 									id: 'amethyst',
-									name: 'A bag of AMETHYST',
+									name: 'a bag of AMETHYST',
 									description: 'A thin plastic bag, containing tiny pieces of AMETHYST',
 									keywords: ['amethyst']
 								}
@@ -1561,7 +1580,7 @@ var GAMEMAP = {
 								displayText: 'You open the chest and find an AQUAMARINE RING in it',
 								item: {
 									id: 'aquamarine-ring',
-									name: 'An AQUAMARINE RING',
+									name: 'an AQUAMARINE RING',
 									description: 'A rather pretty AQUAMARINE RING. Looks to be about a size 5.5',
 									keywords: ['ring', 'aquamarine ring']
 								}
