@@ -917,7 +917,9 @@ var GAMEMAP = {
 				},
 				'up': {
 					roomId: 'H-4',
-					description: 'the upper floor'
+					description: 'the upper floor',
+					elevationType: 'ladder',
+					tense: 'singular'
 				}
 			}
 		},

@@ -351,15 +351,20 @@ class Map {
 								delete reward.item;
 							}
 
+							// Remove the key from inventory
+							for (var i = 0; i < interaction.requires.length; i++) {
+								delete inventory[interaction.requires[i]];
+							}
+
 							return {
 								success: true,
-								message: reward.displayText
+								message: "<p>" + reward.displayText + "</p>"
 							};
 						}
 						else {
 							return {
 								success: false,
-								message: "You can't open that"
+								message: "<p>You can't open that</p>"
 							}
 						}
 					}
