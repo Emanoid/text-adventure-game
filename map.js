@@ -7,6 +7,8 @@ class Map {
 		this.d_currentRoom = this.d_map[mapData.startingRoom];
 		this.d_triggers = mapData.triggers;
 		// Any other game state here
+
+		this.d_previousRoomId = undefined;
 	}
 
 	encodeMapState() {
@@ -33,7 +35,7 @@ class Map {
 	}
 
 	// Update items
-	decodeMapState(stateStr, currentRoomId) {
+	decodeMapState(stateStr, currentRoomId, prevRoomId) {
 		var jsonStr = zlib.inflateSync(Buffer.from(stateStr, 'base64'));
 		try {
 			var roomsObj = JSON.parse(jsonStr);
@@ -49,6 +51,7 @@ class Map {
 				}
 			}
 			this.d_currentRoom = this.d_map[currentRoomId];
+			this.d_previousRoomId = prevRoomId;
 			return true;
 		}
 		catch(err) {
@@ -67,6 +70,7 @@ class Map {
 			// Update the current room
 			var nextRoom = this.d_map[this.d_currentRoom.exits[direction].roomId];
 			if (nextRoom) {
+				this.d_previousRoomId = this.d_currentRoom.roomId;
 				this.d_currentRoom = nextRoom;
 				return true;
 			}
@@ -94,6 +98,14 @@ class Map {
 	take(itemDesc) {
 		var itemResult = this.hasItem(this.d_currentRoom.items, itemDesc);
 		if (itemResult) {
+			// if there is a remnant, move it there
+			if (itemResult.remnant) {
+				if (!this.d_currentRoom.remnants) {
+					this.d_currentRoom.remnants = [];
+				}
+				this.d_currentRoom.remnants.push(itemResult.remnant);
+			}
+
 			delete this.d_currentRoom.items[itemResult.id];
 			return {
 				success: true,
@@ -192,6 +204,11 @@ class Map {
 			}
 		}
 
+		// Remnants
+		// TODO This should be generalized
+		if (this.d_currentRoom.remnants && this.d_currentRoom.remnants.length > 0) {
+			roomString += '<p>' + this.d_currentRoom.remnants[0] + ' used to be here</p>';
+		}
 
 		if (this.d_currentRoom.exits && Object.keys(this.d_currentRoom.exits).length > 0) {
 			roomString += '<p>';
@@ -289,6 +306,18 @@ class Map {
 						break;
 					}
 				}
+				else if (condition.currentRoom) {
+					if (this.d_currentRoom.roomId !== condition.currentRoom) {
+						conditionsMet = false;
+						break;
+					}
+				}
+				else if (condition.previousRoom) {
+					if (this.d_previousRoomId !== condition.previousRoom) {
+						conditionsMet = false;
+						break;
+					}
+				}
 			}
 
 			if (conditionsMet) {
@@ -305,6 +334,13 @@ class Map {
 					triggerResults.push({
 						message: msg
 					});
+
+					if (trigger.yields.item) {
+						if (!this.d_currentRoom.items) {
+							this.d_currentRoom.items = {};
+						}
+						this.d_currentRoom.items[trigger.yields.item.id] = trigger.yields.item;
+					}
 				}
 
 				if (trigger.howMany === 'once') {
@@ -354,6 +390,14 @@ class Map {
 							// Remove the key from inventory
 							for (var i = 0; i < interaction.requires.length; i++) {
 								delete inventory[interaction.requires[i]];
+							}
+
+							// Handle post interaction
+							if (interaction.afterInteraction) {
+								if (interaction.afterInteraction.updateText) {
+									interactable.name = interaction.afterInteraction.updateText.name;
+									interactable.description = interaction.afterInteraction.updateText.description;
+								}
 							}
 
 							return {

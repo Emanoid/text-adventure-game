@@ -1,4 +1,4 @@
-var gameMap = require('./game-map2');
+var gameMap = require('./game-map3');
 var HouseMap = require('./map');
 var zlib = require('zlib');
 
@@ -63,6 +63,11 @@ class Player {
 
 	sendState() {
 		var currRoomId = Buffer.from(this.d_map.d_currentRoom.roomId).toString('base64');
+		var prevRoomId;
+		if (this.d_map.d_previousRoomId) {
+			prevRoomId = Buffer.from(this.d_map.d_previousRoomId).toString('base64');
+		}
+
 		var mapInfo = this.d_map.encodeMapState();
 		var inventoryInfo = zlib.deflateSync(JSON.stringify(this.d_inventory)).toString('base64');
 
@@ -71,6 +76,10 @@ class Player {
 			m: mapInfo,
 			i: inventoryInfo
 		};
+
+		if (prevRoomId) {
+			state.pid = prevRoomId;
+		}
 
 		var b64 = Buffer.from(JSON.stringify(state)).toString('base64');
 		this.d_socket.emit('state', b64);
@@ -82,25 +91,29 @@ class Player {
 		try {
 			var rawState = JSON.parse(rawStateJSON);
 			var roomId = Buffer.from(rawState.rid, 'base64').toString();
+			var prevRoomId;
+			if (rawState.pid) {
+				prevRoomId = Buffer.from(rawState.pid, 'base64').toString();
+			}
 			var inventoryZlib = Buffer.from(rawState.i, 'base64');
 			var inventoryJSON = zlib.inflateSync(inventoryZlib).toString();
 			var inventory = JSON.parse(inventoryJSON);
 
 			this.d_inventory = inventory;
-			if (this.d_map.decodeMapState(rawState.m, roomId)) {
+			if (this.d_map.decodeMapState(rawState.m, roomId, prevRoomId)) {
 				// good to go 
 				this.d_gameStarted = true;
 
 				// TODO Remove this
-				this.sendMessage("<p><i>~~~ Message from the ether: The server was restarted, and your state has been restored. Carry on! (this will be removed in production) ~~~</i></p>");
+				this.sendMessage("<p><b><i>~~~ Message from the ether: The server was restarted, and your state has been restored. Carry on! (this will be removed in production) ~~~</i></b></p>");
 			}
 			else {
 				console.warn("Could not decode map state. Resetting everything");
 				this.d_inventory = {};
 				this.d_map = new HouseMap(JSON.parse(JSON.stringify(gameMap)));
 				this.d_gameStarted = true;
-				this.sendMessage("<p><i>~~~ Sorry, haunted houses usually have spooks, " +
-								 "and we just ran into one of them. Re-starting your adventure. ~~~</i></p>");
+				this.sendMessage("<p><b><i>~~~ Sorry, haunted houses usually have spooks, " +
+								 "and we just ran into one of them. Re-starting your adventure. ~~~</i></b></p>");
 				
 			}
 		}
