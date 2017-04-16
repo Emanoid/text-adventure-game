@@ -15,6 +15,16 @@ var GAMEMAP = {
 	catridgeId: 'mystery-house', // Use this to load the actual map
 	triggers: {
         // B
+        'garnet-medal-b7': {
+            triggerId: 'garnet-medal-b7',
+            conditions: [
+                { currentRoom: 'B-7' },
+                { hasItems: ['garnet-medal'] }
+            ],
+            yields: {
+                displayText: 'The garnet medal seems to have a life of its own and wants to head east.'
+            }
+        },
         'garnet-medal-b6': {
             triggerId: 'garnet-medal-b6',
             conditions: [
@@ -22,7 +32,7 @@ var GAMEMAP = {
                 { hasItems: ['garnet-medal'] }
             ],
             yields: {
-                displayText: 'The garnet medal starts pulsing and pulling you toward the floor below'
+                displayText: 'The garnet medal starts pulsing and pulling you toward the floor below.'
             }
         },
         'garnet-medal-b5': {
@@ -32,7 +42,7 @@ var GAMEMAP = {
                 { hasItems: ['garnet-medal'] }
             ],
             yields: {
-                displayText: 'The garnet medal starts tugging gently southward'
+                displayText: 'The garnet medal starts tugging gently southward.'
             }
         },
         'garnet-medal-b4': {
@@ -42,7 +52,7 @@ var GAMEMAP = {
                 { hasItems: ['garnet-medal'] }
             ],
             yields: {
-                displayText: 'The garnet medal tugs gently westward'
+                displayText: 'The garnet medal tugs gently westward.'
             }
         },
         'garnet-medal-b3': {
@@ -52,11 +62,40 @@ var GAMEMAP = {
                 { hasItems: ['garnet-medal'] }
             ],
             yields: {
-                displayText: 'The garnet medal seems to want to head north'
+                displayText: 'The garnet medal seems to want to head north.'
             }
         },
-
+        'garnet-medal-b2': {
+            triggerId: 'garnet-medal-b2',
+            conditions: [
+                { currentRoom: 'B-2' },
+                { hasItems: ['garnet-medal'] }
+            ],
+            yields: {
+                displayText: 'The garnet medal seems to want to head north.'
+            }
+        },
+        'garnet-medal-b1': {
+            triggerId: 'garnet-medal-b1',
+            conditions: [
+                { currentRoom: 'B-1' },
+                { hasItems: ['garnet-medal'] }
+            ],
+            yields: {
+                displayText: 'The garnet medal is pulsating vigorously. That is a little odd.'
+            }
+        },
         // O
+        'amethyst-o6': {
+            triggerId: 'amethyst-o6',
+            conditions: [
+                { currentRoom: 'O-6' },
+                { hasItems: ['amethyst'] }
+            ],
+            yields: {
+                displayText: 'The amethyst seems to want to go east.'
+            }
+        },
         'amethyst-o5': {
             triggerId: 'amethyst-o5',
             conditions: [
@@ -64,7 +103,7 @@ var GAMEMAP = {
                 { hasItems: ['amethyst'] }
             ],
             yields: {
-                displayText: 'The amethyst tugs gently northward'
+                displayText: 'The amethyst tugs gently northward.'
             }
         },
         'amethyst-o4': {
@@ -74,7 +113,7 @@ var GAMEMAP = {
                 { hasItems: ['amethyst'] }
             ],
             yields: {
-                displayText: 'The amethyst starts pulling you toward the floor'
+                displayText: 'The amethyst starts pulling you toward the floor.'
             }
         },
         'amethyst-o3': {
@@ -84,11 +123,41 @@ var GAMEMAP = {
                 { hasItems: ['amethyst'] }
             ],
             yields: {
-                displayText: 'The amethyst seems to want to head west'
+                displayText: 'The amethyst seems to want to head west.'
+            }
+        },
+        'amethyst-o2': {
+            triggerId: 'amethyst-o2',
+            conditions: [
+                { currentRoom: 'O-2' },
+                { hasItems: ['amethyst'] }
+            ],
+            yields: {
+                displayText: 'The amethyst pulls upwards.'
+            }
+        },
+        'amethyst-o1': {
+            triggerId: 'amethyst-o1',
+            conditions: [
+                { currentRoom: 'O-1' },
+                { hasItems: ['amethyst'] }
+            ],
+            yields: {
+                displayText: 'The amethyst rattles violently.'
             }
         },
 
         // O
+        'aquamarine-oo6': {
+            triggerId: 'aquamarine-oo6',
+            conditions: [
+                { currentRoom: 'OO-6' },
+                { hasItems: ['aquamarine-ring'] }
+            ],
+            yields: {
+                displayText: 'The aquamarine ring seems to think that south is the way to go.'
+            }
+        },
         'aquamarine-oo5': {
             triggerId: 'aquamarine-oo5',
             conditions: [
@@ -96,7 +165,7 @@ var GAMEMAP = {
                 { hasItems: ['aquamarine-ring'] }
             ],
             yields: {
-                displayText: 'The aquamarine ring urges you eastward'
+                displayText: 'The aquamarine ring urges you eastward.'
             }
         },
         'aquamarine-oo4': {
@@ -106,7 +175,7 @@ var GAMEMAP = {
                 { hasItems: ['aquamarine-ring'] }
             ],
             yields: {
-                displayText: 'The aquamarine ring seems to want to head north'
+                displayText: 'The aquamarine ring seems to want to head north.'
             }
         },
         'aquamarine-oo3': {
@@ -119,8 +188,38 @@ var GAMEMAP = {
                 displayText: 'The aquamarine ring flies out of your bag toward the ceiling. Good thing you caught it.'
             }
         },
+        'aquamarine-oo2': {
+            triggerId: 'aquamarine-oo2',
+            conditions: [
+                { currentRoom: 'OO-2-A-3' },
+                { hasItems: ['aquamarine-ring'] }
+            ],
+            yields: {
+                displayText: 'The aquamarine ring seems to want to head west.'
+            }
+        },
+        'aquamarine-oo1': {
+            triggerId: 'aquamarine-oo1',
+            conditions: [
+                { currentRoom: 'OO-1' },
+                { hasItems: ['aquamarine-ring'] }
+            ],
+            yields: {
+                displayText: 'The aquamarine starts glowing vigorously.'
+            }
+        },
 
         // Y
+        'diamond-y9': {
+            triggerId: 'diamond-y9',
+            conditions: [
+                { currentRoom: 'Y-9' },
+                { hasItems: ['diamond-necklace'] }
+            ],
+            yields: {
+                displayText: 'The diamond necklace pulls your neck toward the floor.'
+            }
+        },
         'diamond-y8': {
             triggerId: 'diamond-y8',
             conditions: [
@@ -129,6 +228,16 @@ var GAMEMAP = {
             ],
             yields: {
                 displayText: 'The diamond necklace seems to want to head westward.'
+            }
+        },
+        'diamond-y7': {
+            triggerId: 'diamond-y7',
+            conditions: [
+                { currentRoom: 'Y-7' },
+                { hasItems: ['diamond-necklace'] }
+            ],
+            yields: {
+                displayText: 'The diamond necklace seems to suggest that west is best.'
             }
         },
         'diamond-y6': {
@@ -141,6 +250,26 @@ var GAMEMAP = {
                 displayText: 'The diamond necklace tugs upward.'
             }
         },
+        'diamond-y5': {
+            triggerId: 'diamond-y5',
+            conditions: [
+                { currentRoom: 'Y-5' },
+                { hasItems: ['diamond-necklace'] }
+            ],
+            yields: {
+                displayText: 'The diamond necklace seems to want to go south.'
+            }
+        },
+        'diamond-y4': {
+            triggerId: 'diamond-y4',
+            conditions: [
+                { currentRoom: 'Y-4' },
+                { hasItems: ['diamond-necklace'] }
+            ],
+            yields: {
+                displayText: 'The diamond necklace tugs sharply downward.'
+            }
+        },
         'diamond-y3': {
             triggerId: 'diamond-y3',
             conditions: [
@@ -151,8 +280,38 @@ var GAMEMAP = {
                 displayText: 'The diamond necklace seems to want to go east'
             }
         },
+        'diamond-y2': {
+            triggerId: 'diamond-y2',
+            conditions: [
+                { currentRoom: 'Y-2' },
+                { hasItems: ['diamond-necklace'] }
+            ],
+            yields: {
+                displayText: 'The diamond necklace pulls on your neck so hard that you almost fall down the stairs.'
+            }
+        },
+        'diamond-y1': {
+            triggerId: 'diamond-y1',
+            conditions: [
+                { currentRoom: 'Y-1' },
+                { hasItems: ['diamond-necklace'] }
+            ],
+            yields: {
+                displayText: 'The diamond necklace starts glowing brightly.'
+            }
+        },
 
         // A
+        'emerald-a8': {
+            triggerId: 'emerald-a8',
+            conditions: [
+                { currentRoom: 'A-8' },
+                { hasItems: ['emerald-shot-glass'] }
+            ],
+            yields: {
+                displayText: 'The emerald shot glass seems to want to head east.'
+            }
+        },
         'emerald-a7': {
             triggerId: 'emerald-a7',
             conditions: [
@@ -161,6 +320,16 @@ var GAMEMAP = {
             ],
             yields: {
                 displayText: 'The emerald shot glass seems to want you to head south.'
+            }
+        },
+        'emerald-a6': {
+            triggerId: 'emerald-a6',
+            conditions: [
+                { currentRoom: 'A-6' },
+                { hasItems: ['emerald-shot-glass'] }
+            ],
+            yields: {
+                displayText: 'The emerald shot glass whispers that south is the way to go. That might have been your imagination though.'
             }
         },
         'emerald-a5': {
@@ -173,6 +342,16 @@ var GAMEMAP = {
                 displayText: 'The emerald shot glass looks like it wants to hit the roof.'
             }
         },
+        'emerald-a4': {
+            triggerId: 'emerald-a4',
+            conditions: [
+                { currentRoom: 'A-4' },
+                { hasItems: ['emerald-shot-glass'] }
+            ],
+            yields: {
+                displayText: 'The emerald shot glass starts tilting toward the west.'
+            }
+        },
         'emerald-a3': {
             triggerId: 'emerald-a3',
             conditions: [
@@ -180,7 +359,27 @@ var GAMEMAP = {
                 { hasItems: ['emerald-shot-glass'] }
             ],
             yields: {
-                displayText: 'The emerald shot glass tugs northward'
+                displayText: 'The emerald shot glass tugs northward.'
+            }
+        },
+        'emerald-a2': {
+            triggerId: 'emerald-a2',
+            conditions: [
+                { currentRoom: 'A-2' },
+                { hasItems: ['emerald-shot-glass'] }
+            ],
+            yields: {
+                displayText: 'The emerald shot glass pulls east.'
+            }
+        },
+        'emerald-a1': {
+            triggerId: 'emerald-a1',
+            conditions: [
+                { currentRoom: 'A-1' },
+                { hasItems: ['emerald-shot-glass'] }
+            ],
+            yields: {
+                displayText: 'The emerald shot magically fills up with a strange liquid. Over and over again.'
             }
         },
         'door-shut': {
@@ -677,7 +876,7 @@ var GAMEMAP = {
         // Floor 0 row 5
         '0-1-5': {
             roomId: '0-1-5',
-            description: "You are in a fairly large foyer. There is a table in the center of the room with a <b><i>letter</i></b> on it. It reads 'Remember the <b><i>path</i></b> you took. All objects <b><i>taken</i></b> should be <b><i>returned</i></b> to their rightful place. Be nice to the next guest!'",
+            description: "You are in a fairly large foyer. There is a table in the center of the room with a <b><i>letter</i></b> on it. It reads 'Remember the <b><i>path</i></b> you took, for all paths of interest lead to interesting <i>letters</i> back home. All objects <b><i>taken</i></b> should be <b><i>returned</i></b> to their rightful place. Be nice to the next guest!'",
             exits: {
                 'north': {
                     roomId: '0-1-4',
@@ -691,7 +890,7 @@ var GAMEMAP = {
         },
         '0-2-5': {
             roomId: '0-2-5',
-            description: "You are in an entry hallway, with <b><i>stone</i></b> lions. They are arranged in order of size, as if the <b><i>youngest</i></b> is on one side, and the <b><i>oldest</i></b> on the other. Interesting choice of decor.",
+            description: "You are in an entry hallway, with <b><i>stone</i></b> lions. Each lion has a pendant with its <i>birth</i>date on it. Interesting choice of decor.",
             exits: {
                 'west': {
                     roomId: '0-1-5',

@@ -26,9 +26,12 @@ var WELCOME_MESSAGE =
 	'</p>';
 
 class Player {
-	constructor(id, socket) {
+	constructor(id, socket, gameSaveName, funcs) {
 		this.d_id = id;
 		this.d_socket = socket;
+		this.d_gameSaveName = gameSaveName;
+		this.d_funcs = funcs;
+
 		this.d_inventory = {};
 		this.d_roomsExplored = {};
 		var gameMapCopy = JSON.parse(JSON.stringify(gameMap));
@@ -55,23 +58,30 @@ class Player {
 			}
 			else {
 				this.sendMessage("<p>Welcome to the Text-o-Matic Game Engine</p>" +
-						 "<p>Type 'load [game-name]' to start playing!</p>");
+						 "<p>Type 'load [game-name]' to start playing!</p>" +
+						 "<p>If you were given a game code, type 'usecode [game-code]' to use it</p>");
 			}
 		}.bind(this));
 		
 	}
 
 	sendState() {
+		var gsName = Buffer.from(this.d_gameSaveName).toString('base64');
 		var currRoomId = Buffer.from(this.d_map.d_currentRoom.roomId).toString('base64');
 		var prevRoomId;
 		if (this.d_map.d_previousRoomId) {
 			prevRoomId = Buffer.from(this.d_map.d_previousRoomId).toString('base64');
+		}
+		var triggers;
+		if (this.d_map.d_triggers) {
+			triggers = zlib.deflateSync(JSON.stringify(this.d_map.d_triggers)).toString('base64');
 		}
 
 		var mapInfo = this.d_map.encodeMapState();
 		var inventoryInfo = zlib.deflateSync(JSON.stringify(this.d_inventory)).toString('base64');
 
 		var state = {
+			gs: gsName,
 			rid: currRoomId,
 			m: mapInfo,
 			i: inventoryInfo
@@ -80,32 +90,60 @@ class Player {
 		if (prevRoomId) {
 			state.pid = prevRoomId;
 		}
+		if (triggers) {
+			state.t = triggers;
+		}
 
 		var b64 = Buffer.from(JSON.stringify(state)).toString('base64');
+
+		if (this.d_funcs && this.d_funcs.saveState) {
+			this.d_funcs.saveState(this.d_gameSaveName, b64);
+		}
 		this.d_socket.emit('state', b64);
 	}
 
-	decodeState(stateStr) {
+	decodeState(stateStr, fromCode) {
 		var rawStateJSON = Buffer.from(stateStr, 'base64').toString();
 		
 		try {
 			var rawState = JSON.parse(rawStateJSON);
+			var gsName = Buffer.from(rawState.gs, 'base64').toString();
 			var roomId = Buffer.from(rawState.rid, 'base64').toString();
 			var prevRoomId;
 			if (rawState.pid) {
 				prevRoomId = Buffer.from(rawState.pid, 'base64').toString();
 			}
+			var triggers;
+			if (rawState.t) {
+				var triggerZlib = Buffer.from(rawState.t, 'base64');
+				var triggerJson = zlib.inflateSync(triggerZlib).toString();
+				triggers = JSON.parse(triggerJson);
+			}
+			
 			var inventoryZlib = Buffer.from(rawState.i, 'base64');
 			var inventoryJSON = zlib.inflateSync(inventoryZlib).toString();
 			var inventory = JSON.parse(inventoryJSON);
 
 			this.d_inventory = inventory;
-			if (this.d_map.decodeMapState(rawState.m, roomId, prevRoomId)) {
+			if (this.d_map.decodeMapState(rawState.m, roomId, prevRoomId, triggers)) {
 				// good to go 
 				this.d_gameStarted = true;
+				
+				var oldName = this.d_gameSaveName;
+				this.d_gameSaveName = gsName;
 
-				// TODO Remove this
-				this.sendMessage("<p><b><i>~~~ Message from the ether: The server was restarted, and your state has been restored. Carry on! (this will be removed in production) ~~~</i></b></p>");
+				// Inform the host of our existing game name
+				if (this.d_funcs.onRecapUpdateName) {
+					this.d_funcs.onRecapUpdateName(this.d_gameSaveName, oldName);
+				}
+
+				if (fromCode) {
+					this.sendMessage("<p><b><i>~~~ The spooks have moved you to your last known location. Have fun continuing your adventure! ~~~</i></b></p>");
+				}
+				else {
+					// TODO Remove this
+					this.sendMessage("<p><b><i>~~~ Message from the ether: The server was restarted, and your state has been restored. Carry on! (this will be removed in production) ~~~</i></b></p>");
+				}
 			}
 			else {
 				console.warn("Could not decode map state. Resetting everything");
@@ -133,6 +171,9 @@ class Player {
 			else {
 				welcomeMessage = this.d_mapInfo.introText;
 			}
+
+			// Include game code
+			welcomeMessage += "<p>Your Game Code for this adventure is: '<i>" + this.d_gameSaveName + "</i>'</p>";
 		}
 		this.sendMessage(welcomeMessage);
 	}
@@ -204,6 +245,17 @@ class Player {
 					this.sendMessage("<p>Can't load " + parsed.cartridge + "!</p>");
 				}
 				return;
+			}
+			else if (parsed.type === 'use-code') {
+				// TODO LOAD STATE HERE
+				if (this.d_funcs && this.d_funcs.loadState) {
+					var savedState = this.d_funcs.loadState(parsed.code);
+					if (savedState) {
+						this.decodeState(savedState, true);
+						return;
+					}
+				}
+				// Otherwise fallthrough
 			}
 			this.sendMessage("<p>INVALID COMMAND</p>");
 			return;
@@ -371,6 +423,13 @@ class Player {
 					cartridge: commandParts.length > 1 ? commandParts.slice(1).join(' ') : undefined,
 					rawCommand: command,
 				};
+			}
+			case 'usecode': {
+				return {
+					type: 'use-code',
+					code: commandParts.length > 1 ? commandParts.slice(1).join(' ') : undefined,
+					rawCommand: command
+				}
 			}
 			case 'move': 
 			case 'go': {

@@ -30,12 +30,20 @@ class Map {
 
 				roomsOfInterest[roomId].interactables = currRoom.interactables;
 			}
+
+			if (currRoom.remnants) {
+				if (!roomsOfInterest[roomId]) {
+					roomsOfInterest[roomId] = {};
+				}
+
+				roomsOfInterest[roomId].remnants = currRoom.remnants;
+			}
 		}
 		return zlib.deflateSync(JSON.stringify(roomsOfInterest)).toString('base64');
 	}
 
 	// Update items
-	decodeMapState(stateStr, currentRoomId, prevRoomId) {
+	decodeMapState(stateStr, currentRoomId, prevRoomId, triggers) {
 		var jsonStr = zlib.inflateSync(Buffer.from(stateStr, 'base64'));
 		try {
 			var roomsObj = JSON.parse(jsonStr);
@@ -48,10 +56,16 @@ class Map {
 					if (incomingRoom.interactables) {
 						this.d_map[roomId].interactables = incomingRoom.interactables;
 					}
+					if (incomingRoom.remnants) {
+						this.d_map[roomId].remnants = incomingRoom.remnants;
+					}
 				}
 			}
 			this.d_currentRoom = this.d_map[currentRoomId];
 			this.d_previousRoomId = prevRoomId;
+			if (triggers) {
+				this.d_triggers = triggers;
+			}
 			return true;
 		}
 		catch(err) {
