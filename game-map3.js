@@ -892,6 +892,10 @@ var GAMEMAP = {
                     roomId: 'A-2',
                     description: 'a walk in closet'
                 },
+                'west': {
+                    roomId: 'Y-7',
+                    description: 'a hallway'
+                },
                 'up': {
                     roomId: 'Y-9',
                     description: 'a small room'
@@ -1044,7 +1048,7 @@ var GAMEMAP = {
         },
         'Y-9': {
             roomId: 'Y-9',
-            description: "You are in a small room at the top of the house. There is a statue of a bear here with its hands outstretched, as if it wants something. The bear is wearing a red shirt and no pants.",
+            description: "You are in a small room at the top of the house. There is a statue of a bear here with its hands outstretched, as if it wants something. The bear is wearing a red shirt and no pants. There is also a giant painting behind the bear, of a bear (you're not sure if it's the same bear), standing over a jar. It is titled 'Bear king of the North'.",
             interactables: {
 				'hunny-bear': {
 					name: 'a statue of a bear wearing a red shirt and no pants.',
