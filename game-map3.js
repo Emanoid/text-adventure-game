@@ -637,7 +637,7 @@ var GAMEMAP = {
 							yields: {
 								displayText: '<p>The phone beeps happily. A message appears on the screen.</p>' + 
 											 '<p>"Oh, hello! I\'m glad you contacted me. I\'m stuck, and you\'re my only hope."</p>' +
-											 '<p>"You need to tell someone about me, that MORTICIA sent you."</p>',
+											 '<p>"You need to tell someone about me, that the POLTEXTGEIST sent you."</p>',
 								preformatted: true
 							}
 						}
