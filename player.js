@@ -144,6 +144,13 @@ class Player {
 					// TODO Remove this
 					this.sendMessage("<p><b><i>~~~ Message from the ether: The server was restarted, and your state has been restored. Carry on! (this will be removed in production) ~~~</i></b></p>");
 				}
+
+				// Force a game state save if we are restoring
+				// This ensures that even if the server goes down, a recapping client
+				// will ensure that the game states are saved correctly
+				if (this.d_funcs && this.d_funcs.saveState) {
+					this.d_funcs.saveState(this.d_gameSaveName, stateStr);
+				}
 			}
 			else {
 				console.warn("Could not decode map state. Resetting everything");
