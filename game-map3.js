@@ -710,7 +710,7 @@ var GAMEMAP = {
 				'honey-jar': {
 					id: 'honey-jar',
 					keywords: ['jar', 'honey jar', 'hunny jar'],
-					name: 'a JAR of Northern Pride Hunny',
+					name: 'a JAR of "Northern Pride Hunny"',
 					description: 'A rather large JAR of golden yellow hunny',
                     remnant: 'A jar of honey', // This gets added to the remnant section: <item> was here
 				}
@@ -810,7 +810,7 @@ var GAMEMAP = {
         // Floor 0 row 4
         '0-0-4': {
             roomId: '0-0-4',
-            description: "You are in what looks like a living room. There is a huge couch off to the side. There is also a giant poster hanging on the wall, which reads 'Do what makes sense with the tools you have'. Uhm, ok.",
+            description: "You are in what looks like a living room. There is a huge couch off to the side. There is also a giant poster hanging on the wall, which reads 'Do what makes sense with the tools you have, but actions vary by location'. Uhm, ok.",
             exits: {
                 'north': {
                     roomId: '0-0-3',
@@ -876,7 +876,7 @@ var GAMEMAP = {
         // Floor 0 row 5
         '0-1-5': {
             roomId: '0-1-5',
-            description: "You are in a fairly large foyer. There is a table in the center of the room with a <b><i>letter</i></b> on it. It reads 'Remember the <b><i>path</i></b> you took, for all paths of interest lead to interesting <i>letters</i> back home. All objects <b><i>taken</i></b> should be <b><i>returned</i></b> to their rightful place. Be nice to the next guest!'",
+            description: "You are in a fairly large foyer. There is a table in the center of the room with a <b><i>letter</i></b> on it. It reads 'Remember the <b><i>path</i></b> you took, for all paths of interest lead to interesting <b><i>letters</i></b> back home. All objects <b><i>taken</i></b> should be <b><i>returned</i></b> to their rightful place. Be nice to the next guest!'",
             exits: {
                 'north': {
                     roomId: '0-1-4',
@@ -890,7 +890,7 @@ var GAMEMAP = {
         },
         '0-2-5': {
             roomId: '0-2-5',
-            description: "You are in an entry hallway, with <b><i>stone</i></b> lions. Each lion has a pendant with its <i>birth</i>date on it. Interesting choice of decor.",
+            description: "You are in an entry hallway, with <b><i>stone</i></b> lions. Each lion has a pendant with its <b><i>birth</i></b>date on it, written in relatively <i>modern</i> font. Interesting choice of decor.",
             exits: {
                 'west': {
                     roomId: '0-1-5',
