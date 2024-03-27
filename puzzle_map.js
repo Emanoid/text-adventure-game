@@ -1,19 +1,16 @@
-
 // Herein lies.. the game map
 var GAMEMAP = {
 	startingRoom: 'outside',
-	gameTitle: 'The House... of Mystery!',
-    introText: "<p>You! Hey you! I have a job for you. There's a house over that hill and people have been " +
-               "hearing some weird noises coming from it. I'll make it worth your while if you go over there " + 
-               "and investigate! Take lots of notes, draw diagrams, I want to know all the details!. Just over that hill. Go!</p>" +
+	gameTitle: 'Dungeon Explore',
+    introText: "<p>Some text to inviting players to explore dungeon </p>" +
                "<p>Oh wait! Never let it be said that I'm not helpful. Here's a simple TEXT communitron. Just type " +
                "in what you're up to or what you plan to do, and I'll get that information too. If you run into problems " +
 			   "or just can't figure out what to do " +
                "just type in 'help' or '?'. You got all that? Good. Now go forth and explore! I'll be hiding, uh " +
                "I mean hanging out here</p>" + 
-               "<p>*** Use the TEXT box at the bottom to navigate the world ***</p>",
+               "<p>*** Use the TEXT box at the bottom to navigate the dungeion ***</p>",
     preformattedIntroText: true,
-	catridgeId: 'mystery-house', // Use this to load the actual map
+	catridgeId: 'explore-dungeon', // Use this to load the actual map
 	triggers: {
         // B
         'garnet-medal-b7': {
